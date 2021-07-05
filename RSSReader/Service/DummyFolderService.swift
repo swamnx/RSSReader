@@ -9,7 +9,18 @@ import Foundation
 
 class DummyFolderService: FolderServiceProtocol {
     
-    var folders =  [FolderUi.init(id: 0, title: "Some empty folder")]
+    var folders =  [
+        FolderUi.init(id: 0, title: "Some empty folder"),
+        FolderUi.init(id: 1, title: "Test folder", feeds: [.init(id: 2, icon: .checkmark, title: "Feed in Folder", categories: ["pets", "cars"])])
+    ]
+    
+    static var shared: DummyFolderService {
+        return DummyFolderService()
+    }
+    
+    private init() {
+        
+    }
     
     func loadAll() -> [FolderUi] {
         return folders

@@ -18,4 +18,13 @@ struct FeedUi {
     var totalNumberOfNews: Int {
         return 0
     }
+    
+    func getCellText() -> String {
+        var text = title
+        for category in categories {
+            text += " "
+            text += category
+        }
+        return text + " " + String.init(totalNumberOfNews)
+    }
 }
