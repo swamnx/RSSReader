@@ -13,6 +13,7 @@
 		281D3FA726935CDA00A0AC00 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 281D3FA526935CDA00A0AC00 /* Main.storyboard */; };
 		281D3FA926935CDB00A0AC00 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 281D3FA826935CDB00A0AC00 /* Assets.xcassets */; };
 		281D3FAC26935CDB00A0AC00 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 281D3FAA26935CDB00A0AC00 /* LaunchScreen.storyboard */; };
+		A096919489EDE85CEC31E5D3 /* Pods_RSSReader.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32F927D43A2EE75B307B23D1 /* Pods_RSSReader.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,9 @@
 		281D3FA826935CDB00A0AC00 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		281D3FAB26935CDB00A0AC00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		281D3FAD26935CDB00A0AC00 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		32F927D43A2EE75B307B23D1 /* Pods_RSSReader.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RSSReader.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		867618DAA2332AA53A5E6992 /* Pods-RSSReader.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RSSReader.debug.xcconfig"; path = "Target Support Files/Pods-RSSReader/Pods-RSSReader.debug.xcconfig"; sourceTree = "<group>"; };
+		9A1A3B41F817230C64FC4AB4 /* Pods-RSSReader.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RSSReader.release.xcconfig"; path = "Target Support Files/Pods-RSSReader/Pods-RSSReader.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A096919489EDE85CEC31E5D3 /* Pods_RSSReader.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +47,8 @@
 			children = (
 				281D3F9E26935CDA00A0AC00 /* RSSReader */,
 				281D3F9D26935CDA00A0AC00 /* Products */,
+				AFB4DBEBED10EB83D43706D7 /* Pods */,
+				7F0DC2B98E336062D7B588F5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -67,6 +74,24 @@
 			path = RSSReader;
 			sourceTree = "<group>";
 		};
+		7F0DC2B98E336062D7B588F5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				32F927D43A2EE75B307B23D1 /* Pods_RSSReader.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		AFB4DBEBED10EB83D43706D7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				867618DAA2332AA53A5E6992 /* Pods-RSSReader.debug.xcconfig */,
+				9A1A3B41F817230C64FC4AB4 /* Pods-RSSReader.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +99,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 281D3FB026935CDB00A0AC00 /* Build configuration list for PBXNativeTarget "RSSReader" */;
 			buildPhases = (
+				0BCC5EEA9CE7B271E1F79DA5 /* [CP] Check Pods Manifest.lock */,
 				281D3F9826935CDA00A0AC00 /* Sources */,
 				281D3F9926935CDA00A0AC00 /* Frameworks */,
 				281D3F9A26935CDA00A0AC00 /* Resources */,
+				1F863527D15230E9436C1F72 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -131,6 +158,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0BCC5EEA9CE7B271E1F79DA5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RSSReader-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		1F863527D15230E9436C1F72 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RSSReader/Pods-RSSReader-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RSSReader/Pods-RSSReader-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RSSReader/Pods-RSSReader-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		281D3F9826935CDA00A0AC00 /* Sources */ = {
@@ -283,6 +352,7 @@
 		};
 		281D3FB126935CDB00A0AC00 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 867618DAA2332AA53A5E6992 /* Pods-RSSReader.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -302,6 +372,7 @@
 		};
 		281D3FB226935CDB00A0AC00 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 9A1A3B41F817230C64FC4AB4 /* Pods-RSSReader.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
