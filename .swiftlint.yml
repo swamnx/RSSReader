@@ -1,5 +1,11 @@
 excluded: 
   - Pods
 line_length: 200
+variable_name:
+  max_length:
+    warning: 45
+    error: 60
+  min_length:
+    warning: 2
 disabled_rules:
   trailing_whitespace
