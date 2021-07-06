@@ -59,22 +59,32 @@ extension AllFeedsController {
 // MARK: Table View Cell Default Swipe Actions
 //
 extension AllFeedsController {
-    
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
+    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let editAction = UIContextualAction(style: .normal, title: "Edit") { [unowned self] (action, view, bool) in
+            // Will be implemented in future tasks
+        }
+        editAction.backgroundColor = UIColor.systemYellow
+        return UISwipeActionsConfiguration(actions: [editAction])
+    }
+
+    override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [unowned self] (action, view, bool) in
             let item = getUniversalItems()[indexPath.row]
             var succesfull = false
             if item.feed != nil {
-                succesfull = succesfull || feedService.removeById(id: item.feed!.id)
+                succesfull = succesfull || self.feedService.removeById(id: item.feed!.id)
             }
             if item.folder != nil {
-                succesfull = succesfull || folderServie.removeById(id: item.folder!.id)
+                succesfull = succesfull || self.folderServie.removeById(id: item.folder!.id)
             }
             if succesfull {
                 tableView.deleteRows(at: [indexPath], with: .fade)
             }
         }
+        return UISwipeActionsConfiguration(actions: [deleteAction])
     }
+
 }
 //
 // MARK: Bar Actions
