@@ -76,3 +76,22 @@ extension AllFeedsController {
         }
     }
 }
+//
+// MARK: Bar Actions
+//
+extension AllFeedsController {
+    
+    @IBAction func plusTapped(_ sender: UIBarButtonItem) {
+        let alertController = UIAlertController(title: "Add New Folder or Feed", message: nil, preferredStyle: .alert)
+
+         let addFolder = UIAlertAction(title: "Add Folder", style: .default, handler: nil )
+         let addFeed = UIAlertAction(title: "Add Feed", style: .default, handler: nil )
+         let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: nil )
+
+         alertController.addAction(addFolder)
+         alertController.addAction(addFeed)
+         alertController.addAction(cancelAction)
+
+         self.present(alertController, animated: true, completion: nil)
+    }
+}

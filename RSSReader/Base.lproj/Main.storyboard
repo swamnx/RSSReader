@@ -40,7 +40,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Feeds And Folders" id="h8r-Oc-Chp" userLabel="Feeds And Folders">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="TLB-BG-ZVS"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="TLB-BG-ZVS">
+                            <connections>
+                                <action selector="plusTapped:" destination="glI-JU-ubm" id="L0a-iJ-00o"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WZa-iq-ueM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
