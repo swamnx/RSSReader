@@ -82,16 +82,53 @@ extension AllFeedsController {
 extension AllFeedsController {
     
     @IBAction func plusTapped(_ sender: UIBarButtonItem) {
+        self.present(getAddFolderOrFeedAlertController(), animated: true, completion: nil)
+    }
+    
+}
+
+//
+// MARK: Private Custom Alerts
+//
+extension AllFeedsController {
+    
+    private func getAddFolderAlertController() -> UIAlertController {
+        let alertController = UIAlertController(title: "Add New Folder", message: nil, preferredStyle: .alert)
+
+        alertController.addTextField { (textField: UITextField!) -> Void in
+            textField.placeholder = "Enter Folder Name"
+        }
+
+        let saveAction = UIAlertAction(title: "Add", style: .default, handler: { [unowned self] _ -> Void in
+            let textField = alertController.textFields![0] as UITextField
+            guard let writtenText = textField.text else { return }
+            if writtenText.isEmpty { return }
+            let folderForSaving = FolderSave.init(title: writtenText)
+            if self.folderServie.save(folder: folderForSaving) != nil {
+                self.tableView.reloadData()
+            }
+        })
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: nil )
+
+        alertController.addAction(saveAction)
+        alertController.addAction(cancelAction)
+        return alertController
+    }
+    
+    private func getAddFolderOrFeedAlertController() -> UIAlertController {
         let alertController = UIAlertController(title: "Add New Folder or Feed", message: nil, preferredStyle: .alert)
 
-         let addFolder = UIAlertAction(title: "Add Folder", style: .default, handler: nil )
-         let addFeed = UIAlertAction(title: "Add Feed", style: .default, handler: nil )
-         let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: nil )
+        let addFolder = UIAlertAction(title: "Add Folder", style: .default, handler: { [unowned self] _ -> Void in
+            self.present(getAddFolderAlertController(), animated: true, completion: nil)
+            
+        })
+        let addFeed = UIAlertAction(title: "Add Feed", style: .default, handler: nil )
+        let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: nil )
 
-         alertController.addAction(addFolder)
-         alertController.addAction(addFeed)
-         alertController.addAction(cancelAction)
-
-         self.present(alertController, animated: true, completion: nil)
+        alertController.addAction(addFolder)
+        alertController.addAction(addFeed)
+        alertController.addAction(cancelAction)
+        return alertController
     }
 }
