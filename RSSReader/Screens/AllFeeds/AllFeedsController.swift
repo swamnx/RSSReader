@@ -55,3 +55,24 @@ extension AllFeedsController {
     }
 
 }
+//
+// MARK: Table View Cell Default Swipe Actions
+//
+extension AllFeedsController {
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let item = getUniversalItems()[indexPath.row]
+            var succesfull = false
+            if item.feed != nil {
+                succesfull = succesfull || feedService.removeById(id: item.feed!.id)
+            }
+            if item.folder != nil {
+                succesfull = succesfull || folderServie.removeById(id: item.folder!.id)
+            }
+            if succesfull {
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            }
+        }
+    }
+}
