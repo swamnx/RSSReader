@@ -13,6 +13,7 @@ struct FeedUi {
     var id: Int
     var icon: UIImage?
     var title: String
+    var url: URL
     var categories = [String]()
     
     var totalNumberOfNews: Int {

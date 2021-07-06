@@ -10,9 +10,9 @@ import Foundation
 class DummyFeedService: FeedServiceProtocol {
     
     var feeds = [
-        FeedUi.init(id: 0, title: "First Feed", categories: []),
-        FeedUi.init(id: 1, icon: .add, title: "Second Feed", categories: ["dogs", "fishes"]),
-        FeedUi.init(id: 2, icon: .checkmark, title: "Feed in Folder", categories: ["pets", "cars"])
+        FeedUi.init(id: 0, title: "First Feed", url: URL.init(string: "https://www.nasa.gov/rss/dyn/breaking_news.rss")!, categories: []),
+        FeedUi.init(id: 1, icon: .add, title: "Second Feed", url: URL.init(string: "https://www.nasa.gov/rss/dyn/breaking_news.rss")!, categories: ["dogs", "fishes"]),
+        FeedUi.init(id: 2, icon: .checkmark, title: "Feed in Folder", url: URL.init(string: "https://www.nasa.gov/rss/dyn/breaking_news.rss")!, categories: ["pets", "cars"])
     ]
     
     static var shared: DummyFeedService {
@@ -40,7 +40,7 @@ class DummyFeedService: FeedServiceProtocol {
     
     func save(feed: FeedSave) -> FeedUi? {
         let id = Int.random(in: 1...99999)
-        let newFeed = FeedUi.init(id: id, icon: feed.icon, title: feed.title, categories: feed.categories)
+        let newFeed = FeedUi.init(id: id, icon: feed.icon, title: feed.title, url: feed.url, categories: feed.categories)
         feeds.append(newFeed)
         return newFeed
     }
@@ -49,7 +49,7 @@ class DummyFeedService: FeedServiceProtocol {
         var newFeeds = [FeedUi]()
         for feed in feeds {
             let id = Int.random(in: 1...99999)
-            let newFeed = FeedUi.init(id: id, icon: feed.icon, title: feed.title, categories: feed.categories)
+            let newFeed = FeedUi.init(id: id, icon: feed.icon, title: feed.title, url: feed.url, categories: feed.categories)
             newFeeds.append(newFeed)
         }
         self.feeds.append(contentsOf: newFeeds)

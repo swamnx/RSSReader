@@ -11,7 +11,9 @@ class DummyFolderService: FolderServiceProtocol {
     
     var folders =  [
         FolderUi.init(id: 0, title: "Some empty folder"),
-        FolderUi.init(id: 1, title: "Test folder", feeds: [.init(id: 2, icon: .checkmark, title: "Feed in Folder", categories: ["pets", "cars"])])
+        FolderUi.init(id: 1, title: "Test folder", feeds: [
+                        .init(id: 2, icon: .checkmark, title: "Feed in Folder", url: URL.init(string: "https://www.nasa.gov/rss/dyn/breaking_news.rss")!, categories: ["pets", "cars"])
+        ])
     ]
     
     static var shared: DummyFolderService {

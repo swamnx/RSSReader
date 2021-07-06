@@ -12,5 +12,6 @@ struct FeedSave {
     
     var icon: UIImage?
     var title: String
+    var url: URL
     var categories = [String]()
 }
