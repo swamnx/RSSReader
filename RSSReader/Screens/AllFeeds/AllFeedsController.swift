@@ -121,9 +121,11 @@ extension AllFeedsController {
 
         let addFolder = UIAlertAction(title: "Add Folder", style: .default, handler: { [unowned self] _ -> Void in
             self.present(getAddFolderAlertController(), animated: true, completion: nil)
-            
         })
-        let addFeed = UIAlertAction(title: "Add Feed", style: .default, handler: nil )
+        let addFeed = UIAlertAction(title: "Add Feed", style: .default, handler: { [unowned self] _ -> Void in
+            let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "AddFeedControllerId") as? UIViewController
+            self.navigationController?.pushViewController(vc!, animated: true)
+        })
         let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: nil )
 
         alertController.addAction(addFolder)
