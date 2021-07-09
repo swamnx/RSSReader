@@ -14,13 +14,21 @@ class AddFeedController: UIViewController, UITextFieldDelegate {
         var add = false
         var existedFeed: FeedUi?
     }
+    
+    class ResponseAttributes {
+        var categories = [String]()
+        var icon: UIImage?
+        var title: String?
+        var url: URL?
+        var rssFeedHasCategories = false
+        var loadedByDefault = false
+    }
+    
+    var rssService = DummyRssService()
+    var feedService = DummyFeedService.shared
 
     var params = AddFeedInitParams()
-    var rssService = DummyRssService()
-    
-    var foundCategories = [String]()
-    var rssFeedHasCategories = false
-    var loadedByDefault = false
+    var response = ResponseAttributes()
     
     @IBOutlet weak var button: UIButton!
     @IBOutlet weak var searchField: UITextField!
@@ -36,9 +44,14 @@ class AddFeedController: UIViewController, UITextFieldDelegate {
         self.title = screenTitleText
         button.setTitle("Save", for: .normal)
         if !params.add {
+            response.icon = params.existedFeed?.icon
+            response.title = params.existedFeed?.title
+            response.url = params.existedFeed?.url
+            response.loadedByDefault = true
+            if (params.existedFeed?.categories.count)! > 0 {
+                response.categories = params.existedFeed!.categories
+            }
             searchField.text = params.existedFeed?.url.absoluteString
-            foundCategories = params.existedFeed!.categories
-            loadedByDefault = true
             categoriesView.reloadData()
         }
     }
@@ -51,12 +64,12 @@ class AddFeedController: UIViewController, UITextFieldDelegate {
 extension AddFeedController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return foundCategories.count
+        return response.categories.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "CategoryCellId", for: indexPath)
-        cell.textLabel?.text = foundCategories[indexPath.row]
+        cell.textLabel?.text = response.categories[indexPath.row]
         return cell
     }
 
@@ -68,13 +81,13 @@ extension AddFeedController: UITableViewDelegate, UITableViewDataSource {
 extension AddFeedController {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if !loadedByDefault && rssFeedHasCategories && tableView.indexPathsForSelectedRows != nil {
+        if !response.loadedByDefault && response.rssFeedHasCategories && tableView.indexPathsForSelectedRows != nil {
             self.enableSaveButton()
         }
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        if !loadedByDefault && rssFeedHasCategories && tableView.indexPathsForSelectedRows == nil {
+        if  !response.loadedByDefault && response.rssFeedHasCategories && tableView.indexPathsForSelectedRows == nil {
             self.disableSaveButton()
         }
     }
@@ -86,6 +99,22 @@ extension AddFeedController {
 extension AddFeedController {
     
     @IBAction func buttonTapped(_ sender: UIButton) {
+        var selectedCategories = [String]()
+        if categoriesView.indexPathsForSelectedRows != nil {
+            for indexPath in categoriesView.indexPathsForSelectedRows! {
+                selectedCategories.append(response.categories[indexPath.row])
+            }
+        }
+        if params.add {
+            let feedSave = FeedSave.init(icon: response.icon, title: response.title!, url: response.url!, categories: selectedCategories)
+            feedService.save(feed: feedSave)
+        } else {
+            params.existedFeed!.title = response.title!
+            params.existedFeed!.icon = response.icon
+            params.existedFeed!.categories = selectedCategories
+            params.existedFeed!.url = response.url!
+            feedService.update(feed: params.existedFeed!)
+        }
         self.navigationController?.popViewController(animated: true)
     }
 }
@@ -104,23 +133,29 @@ extension AddFeedController {
         textField.resignFirstResponder()
         rssService.searchFeed(url: unwrappedUrl, completionHandler: { [weak self] error, searchFeedResponse in
             guard let response = searchFeedResponse else {
-                self?.rssFeedHasCategories = false
+                self?.response.rssFeedHasCategories = false
                 self?.disableSaveButton()
-                self?.foundCategories.removeAll()
+                self?.response.categories.removeAll()
+                self?.response.icon = nil
+                self?.response.title = nil
+                self?.response.loadedByDefault = false
                 let alertController = UIAlertController(title: error!, message: nil, preferredStyle: .alert)
                 let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil )
                 alertController.addAction(okAction)
                 self?.present(alertController, animated: true, completion: nil)
                 return
             }
-            loadedByDefault = false
+            self?.response.loadedByDefault = false
             if response.categories.count > 0 {
-                self?.rssFeedHasCategories = true
+                self?.response.rssFeedHasCategories = true
                 self?.disableSaveButton()
             } else {
                 self?.enableSaveButton()
             }
-            self?.foundCategories = response.categories
+            self?.response.categories = response.categories
+            self?.response.icon = response.icon
+            self?.response.title = response.title
+            self?.response.url = response.url
             self?.categoriesView.reloadData()
         })
        return true

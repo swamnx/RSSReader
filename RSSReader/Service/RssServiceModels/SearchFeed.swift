@@ -6,12 +6,12 @@
 //
 
 import Foundation
+import UIKit
 
 struct SearchFeed {
-    
+    var icon: UIImage?
     var title: String
     var url: URL
-    var selectedCategories = [String]()
     var categories: [String]
     
 }
