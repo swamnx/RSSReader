@@ -56,7 +56,7 @@
         <!--AddFeedController-->
         <scene sceneID="Dee-5v-jpO">
             <objects>
-                <viewController storyboardIdentifier="AddFeedControllerId" title="AddFeedController" id="qJS-uv-475" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddFeedControllerId" title="AddFeedController" id="qJS-uv-475" customClass="AddFeedController" customModule="RSSReader" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bKs-Va-RvS">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -66,11 +66,11 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kXG-ff-6Mv">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="kXG-ff-6Mv" userLabel="Categories View">
                                 <rect key="frame" x="30" y="182" width="354" height="590"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="7pk-Xr-ZRE" style="IBUITableViewCellStyleDefault" id="I9l-uc-wHI">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" textLabel="7pk-Xr-ZRE" style="IBUITableViewCellStyleDefault" id="I9l-uc-wHI" userLabel="Category View Cell">
                                         <rect key="frame" x="0.0" y="24.5" width="354" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="I9l-uc-wHI" id="FZN-po-N2P">
@@ -89,12 +89,15 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RAj-X1-aGw">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RAj-X1-aGw">
                                 <rect key="frame" x="30" y="802" width="354" height="30"/>
                                 <color key="backgroundColor" name="AccentColor"/>
-                                <state key="normal" title="Add">
+                                <state key="normal" title="Add/ Edit">
                                     <color key="titleColor" systemColor="systemBackgroundColor"/>
                                 </state>
+                                <connections>
+                                    <action selector="buttonTapped:" destination="qJS-uv-475" eventType="touchUpInside" id="IoH-jP-WMq"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="aYE-mm-HTo"/>
@@ -112,10 +115,13 @@
                             <constraint firstItem="RAj-X1-aGw" firstAttribute="top" secondItem="kXG-ff-6Mv" secondAttribute="bottom" constant="30" id="wmh-b6-kGe"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Add Feed" id="q24-QG-hzz">
+                    <navigationItem key="navigationItem" title="Add/ Edit Feed" id="q24-QG-hzz">
                         <barButtonItem key="backBarButtonItem" title="lekt" id="bI6-hg-bKp"/>
                     </navigationItem>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="button" destination="RAj-X1-aGw" id="XhE-od-rgF"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tZE-0e-PYc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

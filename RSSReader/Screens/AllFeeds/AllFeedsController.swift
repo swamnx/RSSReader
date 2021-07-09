@@ -17,6 +17,10 @@ class AllFeedsController: UITableViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+         tableView.reloadData()
+     }
+    
     private func getUniversalItems() -> [UniversalItemUi] {
         var universalItems = [UniversalItemUi]()
         for feed in feedService.loadAllWithoutFolders() {
@@ -133,8 +137,9 @@ extension AllFeedsController {
             self.present(getAddFolderAlertController(), animated: true, completion: nil)
         })
         let addFeed = UIAlertAction(title: "Add Feed", style: .default, handler: { [unowned self] _ -> Void in
-            let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "AddFeedControllerId")
-            self.navigationController?.pushViewController(vc, animated: true)
+            let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "AddFeedControllerId") as? AddFeedController
+            vc!.params.add = true
+            self.navigationController?.pushViewController(vc!, animated: true)
         })
         let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: nil )
 

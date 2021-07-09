@@ -15,9 +15,7 @@ class DummyFeedService: FeedServiceProtocol {
         FeedUi.init(id: 2, icon: .checkmark, title: "Feed in Folder", url: URL.init(string: "https://www.nasa.gov/rss/dyn/breaking_news.rss")!, categories: ["pets", "cars"])
     ]
     
-    static var shared: DummyFeedService {
-        return DummyFeedService()
-    }
+    static var shared = DummyFeedService()
     
     private init() {
         

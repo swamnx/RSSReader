@@ -16,9 +16,7 @@ class DummyFolderService: FolderServiceProtocol {
         ])
     ]
     
-    static var shared: DummyFolderService {
-        return DummyFolderService()
-    }
+    static var shared = DummyFolderService()
     
     private init() {
         
