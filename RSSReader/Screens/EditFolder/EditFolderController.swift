@@ -64,3 +64,24 @@ extension EditFolderController: UITableViewDelegate, UITableViewDataSource {
         return .init()
     }
 }
+//
+// MARK: Table View Cell Default Swipe Actions
+//
+extension EditFolderController {
+    
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        if tableView == feedsView {
+            let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [unowned self] (action, view, bool) in
+                let feedToDelete = params.existedFolder!.feeds[indexPath.row]
+                let succesfull =  self.folderService.removeFeedById(folderId: params.existedFolder!.id, feedId: feedToDelete.id)
+                if succesfull {
+                    params.existedFolder!.feeds.remove(at: indexPath.row)
+                    tableView.deleteRows(at: [indexPath], with: .fade)
+                    self.feedsToAddView.reloadData()
+                }
+            }
+            return UISwipeActionsConfiguration(actions: [deleteAction])
+        }
+        return UISwipeActionsConfiguration(actions: [])
+    }
+}
