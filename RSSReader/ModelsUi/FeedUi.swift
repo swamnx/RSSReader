@@ -15,9 +15,10 @@ struct FeedUi {
     var title: String
     var url: URL
     var categories = [String]()
+    var news = [NewsUi]()
     
     var totalNumberOfNews: Int {
-        return 0
+        return news.count
     }
     
     func getCellText() -> String {

@@ -126,7 +126,58 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="tZE-0e-PYc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="388" y="-120"/>
+            <point key="canvasLocation" x="181" y="803"/>
+        </scene>
+        <!--FeedContoller-->
+        <scene sceneID="rCx-fr-cjZ">
+            <objects>
+                <viewController storyboardIdentifier="FeedControllerId" id="uyG-yg-3nx" userLabel="FeedContoller" customClass="FeedController" customModule="RSSReader" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XYd-FO-PUo">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yO2-fg-Ua7" userLabel="News">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NewsCellId" textLabel="uEe-t5-hgj" style="IBUITableViewCellStyleDefault" id="yr4-mP-teN">
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yr4-mP-teN" id="gWl-bD-Nyy">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="uEe-t5-hgj">
+                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="udP-Dj-4DD"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="udP-Dj-4DD" firstAttribute="bottom" secondItem="yO2-fg-Ua7" secondAttribute="bottom" id="6RT-hT-taE"/>
+                            <constraint firstItem="yO2-fg-Ua7" firstAttribute="top" secondItem="udP-Dj-4DD" secondAttribute="top" id="GdN-qg-A6t"/>
+                            <constraint firstItem="udP-Dj-4DD" firstAttribute="trailing" secondItem="yO2-fg-Ua7" secondAttribute="trailing" id="RcL-9g-oZe"/>
+                            <constraint firstItem="yO2-fg-Ua7" firstAttribute="leading" secondItem="udP-Dj-4DD" secondAttribute="leading" id="sDQ-NQ-vhS"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="News" id="5bd-s2-4qu"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="newsView" destination="yO2-fg-Ua7" id="3GJ-bK-dpl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PhT-D6-JFW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="535" y="-166"/>
         </scene>
         <!--EditFolderController-->
         <scene sceneID="yE5-Gz-Jus">
@@ -237,7 +288,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xti-Gt-YjE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="386.95652173913044" y="559.82142857142856"/>
+            <point key="canvasLocation" x="-1067" y="803"/>
         </scene>
         <!--FolderViewController-->
         <scene sceneID="EUf-G5-KaI">
@@ -288,7 +339,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eKs-hI-7NL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1074" y="560"/>
+            <point key="canvasLocation" x="-432" y="-560"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="JLu-i9-dZx">

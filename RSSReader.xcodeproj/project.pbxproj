@@ -25,6 +25,7 @@
 		2837319226999DC3001715C6 /* EditFolderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2837319126999DC3001715C6 /* EditFolderController.swift */; };
 		283731952699B143001715C6 /* FolderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283731942699B143001715C6 /* FolderController.swift */; };
 		283731972699B52B001715C6 /* NewsUi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283731962699B52B001715C6 /* NewsUi.swift */; };
+		2837319A2699B6DC001715C6 /* FeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283731992699B6DC001715C6 /* FeedController.swift */; };
 		2870B2092694C3F8008FCF9F /* RssServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2870B2082694C3F8008FCF9F /* RssServiceProtocol.swift */; };
 		2870B20D2694C8FD008FCF9F /* SearchFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2870B20C2694C8FD008FCF9F /* SearchFeed.swift */; };
 		2870B20F2694C9F8008FCF9F /* DummyRssService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2870B20E2694C9F8008FCF9F /* DummyRssService.swift */; };
@@ -53,6 +54,7 @@
 		2837319126999DC3001715C6 /* EditFolderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFolderController.swift; sourceTree = "<group>"; };
 		283731942699B143001715C6 /* FolderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderController.swift; sourceTree = "<group>"; };
 		283731962699B52B001715C6 /* NewsUi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsUi.swift; sourceTree = "<group>"; };
+		283731992699B6DC001715C6 /* FeedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedController.swift; sourceTree = "<group>"; };
 		2870B2082694C3F8008FCF9F /* RssServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssServiceProtocol.swift; sourceTree = "<group>"; };
 		2870B20C2694C8FD008FCF9F /* SearchFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFeed.swift; sourceTree = "<group>"; };
 		2870B20E2694C9F8008FCF9F /* DummyRssService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DummyRssService.swift; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 		281D3FCA269378B000A0AC00 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
+				283731982699B6C6001715C6 /* Feed */,
 				283731932699B134001715C6 /* Folder */,
 				2837319026999DB2001715C6 /* EditFolder */,
 				2870B2102694CD9A008FCF9F /* AddFeed */,
@@ -168,6 +171,14 @@
 				283731942699B143001715C6 /* FolderController.swift */,
 			);
 			path = Folder;
+			sourceTree = "<group>";
+		};
+		283731982699B6C6001715C6 /* Feed */ = {
+			isa = PBXGroup;
+			children = (
+				283731992699B6DC001715C6 /* FeedController.swift */,
+			);
+			path = Feed;
 			sourceTree = "<group>";
 		};
 		2870B20B2694C8E5008FCF9F /* RssServiceModels */ = {
@@ -342,6 +353,7 @@
 				281D3FBE2693627E00A0AC00 /* DummyFeedService.swift in Sources */,
 				2870B2122694CDAC008FCF9F /* AddFeedController.swift in Sources */,
 				281D3FC02693628C00A0AC00 /* DummyFolderService.swift in Sources */,
+				2837319A2699B6DC001715C6 /* FeedController.swift in Sources */,
 				281D3FB526935FFC00A0AC00 /* FeedUi.swift in Sources */,
 				281D3FCD26937C2400A0AC00 /* UniversalItemUi.swift in Sources */,
 				281D3FB72693601800A0AC00 /* FolderUi.swift in Sources */,
