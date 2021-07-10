@@ -53,6 +53,7 @@ extension AllFeedsController {
             cell.imageView?.image = item.feed!.icon
         }
         if item.folder != nil {
+            cell.imageView?.image = nil
             cell.textLabel?.text = item.folder!.title
         }
         return cell
@@ -95,7 +96,8 @@ extension AllFeedsController {
                 succesfull = succesfull || self.folderServie.removeById(id: item.folder!.id)
             }
             if succesfull {
-                tableView.deleteRows(at: [indexPath], with: .fade)
+                // tableView.deleteRows(at: [indexPath], with: .fade)
+                tableView.reloadData()
             }
         }
         return UISwipeActionsConfiguration(actions: [deleteAction])

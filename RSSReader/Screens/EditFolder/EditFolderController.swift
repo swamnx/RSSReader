@@ -76,12 +76,31 @@ extension EditFolderController {
                 let succesfull =  self.folderService.removeFeedById(folderId: params.existedFolder!.id, feedId: feedToDelete.id)
                 if succesfull {
                     params.existedFolder!.feeds.remove(at: indexPath.row)
-                    tableView.deleteRows(at: [indexPath], with: .fade)
+                    // tableView.deleteRows(at: [indexPath], with: .fade)
                     self.feedsToAddView.reloadData()
+                    self.feedsView.reloadData()
                 }
             }
             return UISwipeActionsConfiguration(actions: [deleteAction])
         }
         return UISwipeActionsConfiguration(actions: [])
+    }
+}
+
+//
+// MARK: Selection action
+//
+extension EditFolderController {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView == feedsToAddView {
+            let folderWithAddedFeed = folderService.addFeedById(folderId: params.existedFolder!.id, feedId: feedService.loadAllWithoutFolders()[indexPath.row].id)
+            if folderWithAddedFeed != nil {
+                params.existedFolder = folderWithAddedFeed
+                // tableView.deleteRows(at: [indexPath], with: .fade)
+                self.feedsToAddView.reloadData()
+                self.feedsView.reloadData()
+            }
+        }
     }
 }

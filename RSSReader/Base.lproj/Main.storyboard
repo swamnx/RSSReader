@@ -181,7 +181,7 @@
                                 <rect key="frame" x="0.0" y="591" width="414" height="271"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FeedsToAddCellId" textLabel="UUu-ry-Qie" style="IBUITableViewCellStyleDefault" id="DML-xF-C2p">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="gray" indentationWidth="10" reuseIdentifier="FeedsToAddCellId" textLabel="UUu-ry-Qie" style="IBUITableViewCellStyleDefault" id="DML-xF-C2p">
                                         <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DML-xF-C2p" id="YYN-Cq-SLi">
