@@ -239,6 +239,57 @@
             </objects>
             <point key="canvasLocation" x="386.95652173913044" y="559.82142857142856"/>
         </scene>
+        <!--FolderViewController-->
+        <scene sceneID="EUf-G5-KaI">
+            <objects>
+                <viewController storyboardIdentifier="FolderControllerId" title="FolderViewController" id="R6A-tR-ity" customClass="FolderController" customModule="RSSReader" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="F28-KM-HSk">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="tWK-K2-lj5" userLabel="Feeds">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="FeedCellId" textLabel="pgy-SF-PLT" style="IBUITableViewCellStyleDefault" id="1Hi-J0-wQY">
+                                        <rect key="frame" x="0.0" y="24.5" width="414" height="43.5"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="1Hi-J0-wQY" id="ZgN-iV-Txj">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pgy-SF-PLT">
+                                                    <rect key="frame" x="20" y="0.0" width="374" height="43.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="0.0"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="PGz-bt-gJW"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="PGz-bt-gJW" firstAttribute="bottom" secondItem="tWK-K2-lj5" secondAttribute="bottom" id="SjA-mQ-J3v"/>
+                            <constraint firstItem="tWK-K2-lj5" firstAttribute="top" secondItem="PGz-bt-gJW" secondAttribute="top" id="hZL-6V-NOq"/>
+                            <constraint firstItem="tWK-K2-lj5" firstAttribute="leading" secondItem="PGz-bt-gJW" secondAttribute="leading" id="w0v-pF-8bw"/>
+                            <constraint firstItem="PGz-bt-gJW" firstAttribute="trailing" secondItem="tWK-K2-lj5" secondAttribute="trailing" id="yOl-go-YC0"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Feeds in Folder" id="z5P-eB-uGa"/>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="feedsView" destination="tWK-K2-lj5" id="Yb4-id-E15"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eKs-hI-7NL" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1074" y="560"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="JLu-i9-dZx">
             <objects>

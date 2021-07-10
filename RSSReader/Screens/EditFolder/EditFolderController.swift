@@ -14,11 +14,11 @@ class EditFolderController: UIViewController {
     @IBOutlet weak var feedsView: UITableView!
     @IBOutlet weak var feedsToAddView: UITableView!
     
-    class AddFeedInitParams {
+    class EditFolderInitParams {
         var existedFolder: FolderUi?
     }
     
-    var params = AddFeedInitParams()
+    var params = EditFolderInitParams()
     
     var feedService = DummyFeedService.shared
     var folderService = DummyFolderService.shared
