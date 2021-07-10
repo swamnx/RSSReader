@@ -65,7 +65,18 @@ extension AllFeedsController {
 extension AllFeedsController {
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let editAction = UIContextualAction(style: .normal, title: "Edit") { [unowned self] (action, view, bool) in
-            // Will be implemented in future tasks
+            let item = getUniversalItems()[indexPath.row]
+            if item.feed != nil {
+                let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "AddFeedControllerId") as? AddFeedController
+                vc!.params.add = false
+                vc!.params.existedFeed = item.feed!
+                self.navigationController?.pushViewController(vc!, animated: true)
+            }
+            if item.folder != nil {
+                let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "EditFolderControllerId") as? UIViewController
+                self.navigationController?.pushViewController(vc!, animated: true)
+            }
+            
         }
         editAction.backgroundColor = UIColor.systemYellow
         return UISwipeActionsConfiguration(actions: [editAction])
