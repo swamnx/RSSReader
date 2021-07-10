@@ -62,4 +62,20 @@ class DummyFolderService: FolderServiceProtocol {
         return folder
     }
     
+    func removeFeedById(folderId: Int, feedId: Int) -> Bool {
+        let folder = loadById(id: folderId)
+        guard var loadedFolder = folder else { return false }
+        let feedIndex = loadedFolder.feeds.firstIndex(where: {$0.id == feedId})
+        guard let unwrappedFeedIndex = feedIndex else { return false }
+        return loadedFolder.removeFeedAt(index: unwrappedFeedIndex)
+    }
+    
+    func addFeedById(folderId: Int, feedId: Int) -> FolderUi? {
+        let folder = loadById(id: folderId)
+        guard var loadedFolder = folder else { return nil }
+        let feed = DummyFeedService.shared.loadById(id: feedId)
+        guard let loadedFeed = feed else { return nil }
+        return loadedFolder.addFeed(feed: loadedFeed)
+    }
+    
 }

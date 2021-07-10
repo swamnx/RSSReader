@@ -15,4 +15,6 @@ protocol FolderServiceProtocol {
     func save(folder: FolderSave) -> FolderUi?
     func saveAll(folders: [FolderSave]) -> [FolderUi]?
     func update(folder: FolderUi) -> FolderUi?
+    func removeFeedById(folderId: Int, feedId: Int) -> Bool
+    func addFeedById(folderId: Int, feedId: Int) -> FolderUi?
 }
