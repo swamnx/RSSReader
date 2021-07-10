@@ -131,7 +131,7 @@
         <!--EditFolderController-->
         <scene sceneID="yE5-Gz-Jus">
             <objects>
-                <viewController storyboardIdentifier="EditFolderControllerId" title="EditFolderController" id="GiO-iE-RAN" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditFolderControllerId" title="EditFolderController" id="GiO-iE-RAN" customClass="EditFolderController" customModule="RSSReader" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ff1-lv-7FH">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -229,6 +229,11 @@
                     </view>
                     <navigationItem key="navigationItem" title="Edit Folder" id="eGT-X6-FMw"/>
                     <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="feedsToAddView" destination="864-js-0Ct" id="VUh-g5-Jje"/>
+                        <outlet property="feedsView" destination="q08-Oe-hS5" id="5ug-6S-iII"/>
+                        <outlet property="folderNameView" destination="jUX-ot-M9r" id="ECs-Wt-Lrz"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Xti-Gt-YjE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>

@@ -73,7 +73,8 @@ extension AllFeedsController {
                 self.navigationController?.pushViewController(vc!, animated: true)
             }
             if item.folder != nil {
-                let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "EditFolderControllerId") as? UIViewController
+                let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "EditFolderControllerId") as? EditFolderController
+                vc!.params.existedFolder = item.folder!
                 self.navigationController?.pushViewController(vc!, animated: true)
             }
             
