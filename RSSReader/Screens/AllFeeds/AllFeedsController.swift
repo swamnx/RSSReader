@@ -163,3 +163,23 @@ extension AllFeedsController {
         return alertController
     }
 }
+
+//
+// MARK: Selection and Deselection actions
+//
+extension AllFeedsController {
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let item = getUniversalItems()[indexPath.row]
+        if item.feed != nil {
+            let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "FeedControllerId") as? FeedController
+            vc!.params.existedFeed = item.feed!
+            self.navigationController?.pushViewController(vc!, animated: true)
+        }
+        if item.folder != nil {
+            let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "FolderControllerId") as? FolderController
+            vc!.params.existedFolder = item.folder!
+            self.navigationController?.pushViewController(vc!, animated: true)
+        }
+    }
+}
