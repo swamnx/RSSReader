@@ -9,7 +9,7 @@ import Foundation
 
 struct FolderUi {
     
-    var id: Int
+    var id: UUID
     var title: String
     var feeds = [FeedUi]()
 }

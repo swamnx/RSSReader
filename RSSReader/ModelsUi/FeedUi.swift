@@ -10,16 +10,12 @@ import UIKit
 
 struct FeedUi {
     
-    var id: Int
-    var icon: UIImage?
+    var id: UUID
+    var url: String
     var title: String
-    var url: URL
     var categories = [String]()
+    var icon: UIImage?
     var news = [NewsUi]()
-    
-    var totalNumberOfNews: Int {
-        return news.count
-    }
     
     func getCellText() -> String {
         var text = title
@@ -27,6 +23,6 @@ struct FeedUi {
             text += " "
             text += category
         }
-        return text + " " + String.init(totalNumberOfNews)
+        return text + " " + String.init(news.count)
     }
 }

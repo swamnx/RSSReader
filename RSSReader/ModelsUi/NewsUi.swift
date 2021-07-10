@@ -9,12 +9,13 @@ import Foundation
 import UIKit
 
 struct NewsUi {
-    var id: Int
-    var icon: UIImage?
+    
+    var id: UUID
+    var url: String
     var title: String
-    var url: URL
     var text: String
+    var icons =  [UIImage]()
     var read = false
     var favourite = false
+    var deleted = false
 }
-

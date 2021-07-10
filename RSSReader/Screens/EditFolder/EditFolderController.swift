@@ -20,8 +20,8 @@ class EditFolderController: UIViewController {
     
     var params = EditFolderInitParams()
     
-    var feedService = DummyFeedService.shared
-    var folderService = DummyFolderService.shared
+    var feedService = RealmFeedService.shared!
+    var folderService = RealmFolderService.shared!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,10 +73,8 @@ extension EditFolderController {
         if tableView == feedsView {
             let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [unowned self] (action, view, bool) in
                 let feedToDelete = params.existedFolder!.feeds[indexPath.row]
-                let succesfull =  self.folderService.removeFeedById(folderId: params.existedFolder!.id, feedId: feedToDelete.id)
-                if succesfull {
-                    params.existedFolder!.feeds.remove(at: indexPath.row)
-                    // tableView.deleteRows(at: [indexPath], with: .fade)
+                if let folder =  self.folderService.removeFeed(folderId: params.existedFolder!.id, feedId: feedToDelete.id) {
+                    params.existedFolder = folder
                     self.feedsToAddView.reloadData()
                     self.feedsView.reloadData()
                 }
@@ -94,7 +92,7 @@ extension EditFolderController {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == feedsToAddView {
-            let folderWithAddedFeed = folderService.addFeedById(folderId: params.existedFolder!.id, feedId: feedService.loadAllWithoutFolders()[indexPath.row].id)
+            let folderWithAddedFeed = folderService.addFeed(folderId: params.existedFolder!.id, feedId: feedService.loadAllWithoutFolders()[indexPath.row].id)
             if folderWithAddedFeed != nil {
                 params.existedFolder = folderWithAddedFeed
                 // tableView.deleteRows(at: [indexPath], with: .fade)

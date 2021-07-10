@@ -2,7 +2,7 @@
 # platform :ios, '9.0'
 
 pod 'SwiftLint'
-pod 'RealmSwift'
+pod 'RealmSwift', '~>10'
 
 target 'RSSReader' do
   # Comment the next line if you don't want to use dynamic frameworks

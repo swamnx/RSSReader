@@ -9,8 +9,8 @@ import UIKit
 
 class AllFeedsController: UITableViewController {
 
-    var feedService =  DummyFeedService.shared
-    var folderServie =  DummyFolderService.shared
+    var feedService =  RealmFeedService.shared!
+    var folderServie =  RealmFolderService.shared!
     
     override func viewDidLoad() {
         super.viewDidLoad()

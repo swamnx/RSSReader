@@ -10,8 +10,8 @@ import UIKit
 
 struct FeedSave {
     
-    var icon: UIImage?
+    var url: String
     var title: String
-    var url: URL
     var categories = [String]()
+    var icon: UIImage?
 }

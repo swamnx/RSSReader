@@ -31,7 +31,7 @@ class FeedController: UIViewController {
 extension FeedController: UITableViewDelegate, UITableViewDataSource {
         
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return params.existedFeed!.totalNumberOfNews
+        return params.existedFeed!.news.count
     }
         
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

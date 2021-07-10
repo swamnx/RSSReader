@@ -19,13 +19,13 @@ class AddFeedController: UIViewController, UITextFieldDelegate {
         var categories = [String]()
         var icon: UIImage?
         var title: String?
-        var url: URL?
+        var url: String?
         var rssFeedHasCategories = false
         var loadedByDefault = false
     }
     
     var rssService = DummyRssService()
-    var feedService = DummyFeedService.shared
+    var feedService = RealmFeedService.shared!
 
     var params = AddFeedInitParams()
     var response = ResponseAttributes()
@@ -51,7 +51,7 @@ class AddFeedController: UIViewController, UITextFieldDelegate {
             if (params.existedFeed?.categories.count)! > 0 {
                 response.categories = params.existedFeed!.categories
             }
-            searchField.text = params.existedFeed?.url.absoluteString
+            searchField.text = params.existedFeed?.url
             categoriesView.reloadData()
         }
     }
@@ -105,15 +105,12 @@ extension AddFeedController {
                 selectedCategories.append(response.categories[indexPath.row])
             }
         }
+        let feedSave = FeedSave.init(url: response.url!, title: response.title!, categories: response.categories, icon: response.icon)
         if params.add {
-            let feedSave = FeedSave.init(icon: response.icon, title: response.title!, url: response.url!, categories: selectedCategories)
+            let feedSave = FeedSave.init(url: response.url!, title: response.title!, categories: response.categories, icon: response.icon)
             feedService.save(feed: feedSave)
         } else {
-            params.existedFeed!.title = response.title!
-            params.existedFeed!.icon = response.icon
-            params.existedFeed!.categories = selectedCategories
-            params.existedFeed!.url = response.url!
-            feedService.update(feed: params.existedFeed!)
+            feedService.updateWith(feed: feedSave, id: params.existedFeed!.id)
         }
         self.navigationController?.popViewController(animated: true)
     }

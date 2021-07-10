@@ -11,7 +11,7 @@ import UIKit
 struct SearchFeed {
     var icon: UIImage?
     var title: String
-    var url: URL
+    var url: String
     var categories: [String]
     
 }
