@@ -37,7 +37,11 @@ extension FolderController: UITableViewDelegate, UITableViewDataSource {
         
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FeedCellId", for: indexPath)
-        cell.textLabel?.text = params.existedFolder?.feeds[indexPath.row].title
+        let feed = params.existedFolder?.feeds[indexPath.row]
+        cell.textLabel?.text = feed?.getCellText()
+        if feed?.icon != nil {
+            cell.imageView?.image = feed!.icon!.imageResized(to: .init(width: 53, height: 30))
+        }
         return cell
     }
 }
