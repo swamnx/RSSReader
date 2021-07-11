@@ -25,6 +25,7 @@ class FolderController: UIViewController {
         feedsView.reloadData()
     }
 }
+
 //
 // MARK: Table view data source
 //
@@ -40,14 +41,15 @@ extension FolderController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
 }
+
 //
 // MARK: Selection and Deselection actions
 //
 extension FolderController {
     
      func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "FeedControllerId") as? FeedController
-        vc!.params.existedFeed = params.existedFolder?.feeds[indexPath.row]
-        self.navigationController?.pushViewController(vc!, animated: true)
+        let controller = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "FeedControllerId") as? FeedController
+        controller!.params.existedFeed = params.existedFolder?.feeds[indexPath.row]
+        self.navigationController?.pushViewController(controller!, animated: true)
     }
 }

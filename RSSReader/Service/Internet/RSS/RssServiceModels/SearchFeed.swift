@@ -9,10 +9,10 @@ import Foundation
 import UIKit
 
 struct SearchFeed {
-    var icon: UIImage?
-    var title: String
-    var url: String
-    var categories: [String]
-    var news: [SearchNews]
     
+    var url: String
+    var title: String
+    var categories: [String]
+    var icon: UIImage?
+    var news: [SearchNews]
 }

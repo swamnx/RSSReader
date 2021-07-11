@@ -1,5 +1,5 @@
 //
-//  AddFeedController.swift
+//  AddOrEditFeedController.swift
 //  RSSReader
 //
 //  Created by swamnx on 6.07.21.
@@ -8,9 +8,9 @@
 import Foundation
 import UIKit
 
-class AddFeedController: UIViewController, UITextFieldDelegate {
+class AddOrEditFeedController: UIViewController, UITextFieldDelegate {
     
-    class AddFeedInitParams {
+    class AddOrEditFeedInitParams {
         var add = false
         var existedFeed: FeedUi?
     }
@@ -28,7 +28,7 @@ class AddFeedController: UIViewController, UITextFieldDelegate {
     var rssService = InternetRssService()
     var feedService = RealmFeedService.shared!
 
-    var params = AddFeedInitParams()
+    var params = AddOrEditFeedInitParams()
     var response = ResponseAttributes()
     
     @IBOutlet weak var button: UIButton!
@@ -49,7 +49,7 @@ class AddFeedController: UIViewController, UITextFieldDelegate {
             response.title = params.existedFeed?.title
             response.url = params.existedFeed?.url
             response.loadedByDefault = true
-            if (params.existedFeed?.categories.count)! > 0 {
+            if params.existedFeed != nil {
                 response.categories = params.existedFeed!.categories
             }
             searchField.text = params.existedFeed?.url
@@ -62,7 +62,7 @@ class AddFeedController: UIViewController, UITextFieldDelegate {
 //
 // MARK: Table view data source
 //
-extension AddFeedController: UITableViewDelegate, UITableViewDataSource {
+extension AddOrEditFeedController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return response.categories.count
@@ -79,7 +79,7 @@ extension AddFeedController: UITableViewDelegate, UITableViewDataSource {
 //
 // MARK: Selection and Deselection actions
 //
-extension AddFeedController {
+extension AddOrEditFeedController {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if !response.loadedByDefault && response.rssFeedHasCategories && tableView.indexPathsForSelectedRows != nil {
@@ -97,73 +97,68 @@ extension AddFeedController {
 //
 // MARK: Saving Action
 //
-extension AddFeedController {
+extension AddOrEditFeedController {
     
     @IBAction func buttonTapped(_ sender: UIButton) {
-        var selectedCategories = [String]()
-        if categoriesView.indexPathsForSelectedRows != nil {
-            for indexPath in categoriesView.indexPathsForSelectedRows! {
-                selectedCategories.append(response.categories[indexPath.row])
-            }
-        }
+        let selectedCategories = extractSelectedCategories()
         var filteredNews = response.news
         if response.rssFeedHasCategories {
             filteredNews = filterOnlySelectedCategories(news: filteredNews, categories: selectedCategories)
         }
-        var newsSave = [NewsSave]()
-        for newsItem in filteredNews {
-            newsSave.append(.init(url: newsItem.url, title: newsItem.title, text: newsItem.text, categories: newsItem.categories))
-        }
-        let feedSave = FeedSave.init(url: response.url!, title: response.title!, categories: selectedCategories, icon: response.icon, news: newsSave)
+        let newsSaveCollection = filteredNews.map({NewsSave.init(url: $0.url,
+                                                      title: $0.title,
+                                                      text: $0.text,
+                                                      categories: $0.categories)
+        })
+        let feedSave = FeedSave.init(url: response.url!,
+                                    title: response.title!,
+                                    categories: selectedCategories,
+                                    icon: response.icon,
+                                    news: newsSaveCollection)
+        let response: FeedUi?
         if params.add {
-            feedService.save(feed: feedSave)
+            response = feedService.save(feed: feedSave)
         } else {
-            feedService.updateWith(feed: feedSave, id: params.existedFeed!.id)
+            response = feedService.updateWith(feed: feedSave, id: params.existedFeed!.id)
         }
-        self.navigationController?.popViewController(animated: true)
+        if response != nil {
+            self.navigationController?.popViewController(animated: true)
+        }
+        self.present(AddOrEditFeedController.getOkAletControllerWith(title: "Can't saved Feed info"), animated: true, completion: nil)
     }
 }
 
 //
 // MARK: Search Action
 //
-extension AddFeedController {
+extension AddOrEditFeedController {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField.text!.isEmpty {
             return false
         }
         textField.resignFirstResponder()
-        rssService.searchFeed(url:  textField.text!, completionHandler: { [weak self] error, searchFeedResponse in
-            DispatchQueue.main.async {
+        rssService.searchFeed(url: textField.text!, completionHandler: { [weak self] error, searchFeedResponse in
+            DispatchQueue.main.sync {
+                guard let self = self else { return }
                 guard let response = searchFeedResponse else {
-                    self?.response.rssFeedHasCategories = false
-                    self?.disableSaveButton()
-                    self?.response.categories.removeAll()
-                    self?.response.news.removeAll()
-                    self?.response.icon = nil
-                    self?.response.title = nil
-                    self?.response.loadedByDefault = false
-                    let alertController = UIAlertController(title: error!, message: nil, preferredStyle: .alert)
-                    let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil )
-                    alertController.addAction(okAction)
-                    self?.present(alertController, animated: true, completion: nil)
+                    self.present(AddOrEditFeedController.getOkAletControllerWith(title: error!), animated: true, completion: nil)
                     return
                 }
-                self?.response.loadedByDefault = false
+                self.response.loadedByDefault = false
                 if response.categories.count > 0 {
-                    self?.response.rssFeedHasCategories = true
-                    self?.disableSaveButton()
+                    self.response.rssFeedHasCategories = true
+                    self.disableSaveButton()
                 } else {
-                    self?.response.rssFeedHasCategories = false
-                    self?.enableSaveButton()
+                    self.response.rssFeedHasCategories = false
+                    self.enableSaveButton()
                 }
-                self?.response.news = response.news
-                self?.response.categories = response.categories
-                self?.response.icon = response.icon
-                self?.response.title = response.title
-                self?.response.url = response.url
-                self?.categoriesView.reloadData()
+                self.response.news = response.news
+                self.response.categories = response.categories
+                self.response.icon = response.icon
+                self.response.title = response.title
+                self.response.url = response.url
+                self.categoriesView.reloadData()
             }
         })
        return true
@@ -173,8 +168,7 @@ extension AddFeedController {
 //
 // MARK: Utility Methods
 //
-
-extension AddFeedController {
+extension AddOrEditFeedController {
     
     private func disableSaveButton() {
         button.isEnabled = false
@@ -189,17 +183,33 @@ extension AddFeedController {
     private func filterOnlySelectedCategories(news: [SearchNews], categories: [String]) -> [SearchNews] {
         var filteredNews = [SearchNews]()
         for newsItem in news {
-            var hasSelectedCategory = false
-            for category in categories {
-                if newsItem.categories.contains(category) {
-                    hasSelectedCategory = true
-                    break
-                }
-            }
-            if hasSelectedCategory {
+            if newsItem.categories.contains(where: categories.contains) {
                 filteredNews.append(newsItem)
             }
         }
         return filteredNews
+    }
+    
+    private func extractSelectedCategories() -> [String] {
+        var selectedCategories = [String]()
+        if categoriesView.indexPathsForSelectedRows != nil {
+            for indexPath in categoriesView.indexPathsForSelectedRows! {
+                selectedCategories.append(response.categories[indexPath.row])
+            }
+        }
+        return selectedCategories
+    }
+}
+
+//
+// MARK: Private Custom UI Controllers
+//
+extension AddOrEditFeedController {
+    
+    private static func getOkAletControllerWith(title: String) -> UIAlertController {
+        let alertController = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil )
+        alertController.addAction(okAction)
+        return alertController
     }
 }

@@ -7,14 +7,13 @@
 
 import UIKit
 
-class AllFeedsController: UITableViewController {
+class FeedsAndFoldersController: UITableViewController {
 
     var feedService =  RealmFeedService.shared!
     var folderServie =  RealmFolderService.shared!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -23,14 +22,8 @@ class AllFeedsController: UITableViewController {
     
     private func getUniversalItems() -> [UniversalItemUi] {
         var universalItems = [UniversalItemUi]()
-        for feed in feedService.loadAllWithoutFolders() {
-            let newUniversalItem = UniversalItemUi.init(feed: feed, folder: nil)
-            universalItems.append(newUniversalItem)
-        }
-        for folder in folderServie.loadAll() {
-            let newUniversalItem = UniversalItemUi.init(feed: nil, folder: folder)
-            universalItems.append(newUniversalItem)
-        }
+        universalItems.append(contentsOf: feedService.loadAllWithoutFolders().map({UniversalItemUi.init(feed: $0, folder: nil)}))
+        universalItems.append(contentsOf: folderServie.loadAll().map({UniversalItemUi.init(feed: nil, folder: $0)}))
         return universalItems
     }
 
@@ -39,7 +32,7 @@ class AllFeedsController: UITableViewController {
 //
 // MARK: Table view data source
 //
-extension AllFeedsController {
+extension FeedsAndFoldersController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return getUniversalItems().count
@@ -63,30 +56,23 @@ extension AllFeedsController {
 //
 // MARK: Table View Cell Default Swipe Actions
 //
-extension AllFeedsController {
+extension FeedsAndFoldersController {
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let editAction = UIContextualAction(style: .normal, title: "Edit") { [unowned self] (action, view, bool) in
+        let editAction = UIContextualAction(style: .normal, title: "Edit") { [unowned self] (_, _, _) in
             let item = getUniversalItems()[indexPath.row]
             if item.feed != nil {
-                let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "AddFeedControllerId") as? AddFeedController
-                vc!.params.add = false
-                vc!.params.existedFeed = item.feed!
-                self.navigationController?.pushViewController(vc!, animated: true)
+                self.navigationController?.pushViewController(getAddOrEditFeedController(feed: item.feed, add: false), animated: true)
             }
             if item.folder != nil {
-                let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "EditFolderControllerId") as? EditFolderController
-                vc!.params.existedFolder = item.folder!
-                self.navigationController?.pushViewController(vc!, animated: true)
+                self.navigationController?.pushViewController(getEditFolderController(folder: item.folder!), animated: true)
             }
-            
         }
         editAction.backgroundColor = UIColor.systemYellow
         return UISwipeActionsConfiguration(actions: [editAction])
     }
 
     override func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-
-        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [unowned self] (action, view, bool) in
+        let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [unowned self] (_, _, _) in
             let item = getUniversalItems()[indexPath.row]
             var succesfull = false
             if item.feed != nil {
@@ -96,7 +82,6 @@ extension AllFeedsController {
                 succesfull = succesfull || self.folderServie.removeById(id: item.folder!.id)
             }
             if succesfull {
-                // tableView.deleteRows(at: [indexPath], with: .fade)
                 tableView.reloadData()
             }
         }
@@ -107,7 +92,7 @@ extension AllFeedsController {
 //
 // MARK: Bar Actions
 //
-extension AllFeedsController {
+extension FeedsAndFoldersController {
     
     @IBAction func plusTapped(_ sender: UIBarButtonItem) {
         self.present(getAddFolderOrFeedAlertController(), animated: true, completion: nil)
@@ -116,9 +101,50 @@ extension AllFeedsController {
 }
 
 //
-// MARK: Private Custom Alerts
+// MARK: Selection and Deselection actions
 //
-extension AllFeedsController {
+extension FeedsAndFoldersController {
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let item = getUniversalItems()[indexPath.row]
+        if item.feed != nil {
+            self.navigationController?.pushViewController(getFeedController(feed: item.feed!), animated: true)
+        }
+        if item.folder != nil {
+            self.navigationController?.pushViewController(getFolderController(folder: item.folder!), animated: true)
+        }
+    }
+}
+
+//
+// MARK: Private Custom UI Controllers
+//
+extension FeedsAndFoldersController {
+    
+    private func getAddOrEditFeedController(feed: FeedUi?, add: Bool) -> AddOrEditFeedController {
+        let controller = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "AddOrEditFeedControllerId") as? AddOrEditFeedController
+        controller!.params.add = add
+        controller!.params.existedFeed = feed
+        return controller!
+    }
+    
+    private func getEditFolderController(folder: FolderUi) -> EditFolderController {
+        let controller = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "EditFolderControllerId") as? EditFolderController
+        controller!.params.existedFolder = folder
+        return controller!
+    }
+    
+    private func getFeedController(feed: FeedUi) -> FeedController {
+        let controller = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "FeedControllerId") as? FeedController
+        controller!.params.existedFeed = feed
+        return controller!
+    }
+    
+    private func getFolderController(folder: FolderUi) -> FolderController {
+        let controller = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "FolderControllerId") as? FolderController
+        controller!.params.existedFolder = folder
+        return controller!
+    }
     
     private func getAddFolderAlertController() -> UIAlertController {
         let alertController = UIAlertController(title: "Add New Folder", message: nil, preferredStyle: .alert)
@@ -151,9 +177,7 @@ extension AllFeedsController {
             self.present(getAddFolderAlertController(), animated: true, completion: nil)
         })
         let addFeed = UIAlertAction(title: "Add Feed", style: .default, handler: { [unowned self] _ -> Void in
-            let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "AddFeedControllerId") as? AddFeedController
-            vc!.params.add = true
-            self.navigationController?.pushViewController(vc!, animated: true)
+            self.navigationController?.pushViewController(getAddOrEditFeedController(feed: nil, add: true), animated: true)
         })
         let cancelAction = UIAlertAction(title: "Cancel", style: .destructive, handler: nil )
 
@@ -162,24 +186,5 @@ extension AllFeedsController {
         alertController.addAction(cancelAction)
         return alertController
     }
-}
-
-//
-// MARK: Selection and Deselection actions
-//
-extension AllFeedsController {
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let item = getUniversalItems()[indexPath.row]
-        if item.feed != nil {
-            let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "FeedControllerId") as? FeedController
-            vc!.params.existedFeed = item.feed!
-            self.navigationController?.pushViewController(vc!, animated: true)
-        }
-        if item.folder != nil {
-            let vc = UIStoryboard.init(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "FolderControllerId") as? FolderController
-            vc!.params.existedFolder = item.folder!
-            self.navigationController?.pushViewController(vc!, animated: true)
-        }
-    }
 }

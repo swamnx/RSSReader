@@ -35,6 +35,7 @@ class EditFolderController: UIViewController {
     }
     
 }
+
 //
 // MARK: Table view data source
 //
@@ -71,7 +72,7 @@ extension EditFolderController {
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         if tableView == feedsView {
-            let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [unowned self] (action, view, bool) in
+            let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { [unowned self] (_, _, _) in
                 let feedToDelete = params.existedFolder!.feeds[indexPath.row]
                 if let folder =  self.folderService.removeFeed(folderId: params.existedFolder!.id, feedId: feedToDelete.id) {
                     params.existedFolder = folder
@@ -81,7 +82,7 @@ extension EditFolderController {
             }
             return UISwipeActionsConfiguration(actions: [deleteAction])
         }
-        return UISwipeActionsConfiguration(actions: [])
+        return .init()
     }
 }
 
@@ -92,10 +93,11 @@ extension EditFolderController {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == feedsToAddView {
-            let folderWithAddedFeed = folderService.addFeed(folderId: params.existedFolder!.id, feedId: feedService.loadAllWithoutFolders()[indexPath.row].id)
+            let folderWithAddedFeed = folderService.addFeed(folderId: params.existedFolder!.id,
+                                                          feedId: feedService.loadAllWithoutFolders()[indexPath.row].id
+            )
             if folderWithAddedFeed != nil {
                 params.existedFolder = folderWithAddedFeed
-                // tableView.deleteRows(at: [indexPath], with: .fade)
                 self.feedsToAddView.reloadData()
                 self.feedsView.reloadData()
             }

@@ -14,10 +14,8 @@ class NewsRealm: Object {
     @Persisted var url: String
     @Persisted var title: String
     @Persisted var text: String
+    @Persisted var categories: List<String>
     @Persisted var imagesData: List<Data>
-    @Persisted var read: Bool
-    @Persisted var favourite: Bool
-    @Persisted var deleted: Bool
     
     @Persisted(originProperty: "news") var feed: LinkingObjects<FeedRealm>
     
@@ -29,5 +27,6 @@ class NewsRealm: Object {
         for image in images {
             imagesData.append(image.jpegData(compressionQuality: 1.0)!)
         }
+        self.categories.append(objectsIn: categories)
     }
 }

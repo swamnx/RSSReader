@@ -10,11 +10,9 @@ import Foundation
 protocol FolderServiceProtocol {
     
     func loadAll() -> [FolderUi]
-    func loadById(id: Int) -> FolderUi?
-    func removeById(id: Int) -> Bool
+    func loadById(id: UUID) -> FolderUi?
+    func removeById(id: UUID) -> Bool
     func save(folder: FolderSave) -> FolderUi?
-    func saveAll(folders: [FolderSave]) -> [FolderUi]?
-    func update(folder: FolderUi) -> FolderUi?
-    func removeFeedById(folderId: Int, feedId: Int) -> Bool
-    func addFeedById(folderId: Int, feedId: Int) -> FolderUi?
+    func removeFeed(folderId: UUID, feedId: UUID) -> FolderUi?
+    func addFeed(folderId: UUID, feedId: UUID) -> FolderUi?
 }

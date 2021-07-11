@@ -19,13 +19,21 @@ class FeedRealm: Object {
     
     @Persisted(originProperty: "feeds") var folder: LinkingObjects<FolderRealm>
     
-    convenience init(title: String, url: String, categories: [String], image: UIImage?) {
+    convenience init(title: String, url: String, categories: [String], image: UIImage?, news: [NewsSave]) {
         self.init()
         self.title = title
         self.url = url
         self.categories.append(objectsIn: categories)
         if image != nil {
             imageData = image!.jpegData(compressionQuality: 1.0)
+        }
+        for newsItem in news {
+            self.news.append(.init(url: newsItem.url,
+                                   title: newsItem.title,
+                                   text: newsItem.text,
+                                   categories: newsItem.categories,
+                                   images: newsItem.icons)
+            )
         }
     }
 }

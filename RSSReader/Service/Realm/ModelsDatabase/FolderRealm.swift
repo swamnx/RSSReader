@@ -18,9 +18,4 @@ class FolderRealm: Object {
         self.init()
         self.title = title
     }
-    
-    convenience init(uuid: UUID) {
-        self.init()
-        self.uuid = uuid
-    }
 }

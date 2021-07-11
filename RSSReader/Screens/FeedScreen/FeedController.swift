@@ -25,6 +25,7 @@ class FeedController: UIViewController {
         newsView.reloadData()
     }
 }
+
 //
 // MARK: Table view data source
 //

@@ -64,9 +64,6 @@ class Converters {
                           url: newsRealm.url,
                           title: newsRealm.title,
                           text: newsRealm.text,
-                          icons: convertedImages,
-                          read: newsRealm.read,
-                          favourite: newsRealm.favourite,
-                          deleted: newsRealm.deleted)
+                          icons: convertedImages)
     }
 }

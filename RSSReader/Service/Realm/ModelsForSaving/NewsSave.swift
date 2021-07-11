@@ -13,9 +13,6 @@ struct NewsSave {
     var url: String
     var title: String
     var text: String
-    var icons =  [UIImage]()
     var categories = [String]()
-    var read = false
-    var favourite = false
-    var deleted = false
+    var icons =  [UIImage]()
 }

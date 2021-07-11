@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--AllFeedsController-->
+        <!--FeedsAndFoldersController-->
         <scene sceneID="WWX-6p-Ck9">
             <objects>
-                <tableViewController id="glI-JU-ubm" userLabel="AllFeedsController" customClass="AllFeedsController" customModule="RSSReader" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController storyboardIdentifier="FeedsAndFoldersControllerId" title="FeedsAndFoldersController" id="glI-JU-ubm" customClass="FeedsAndFoldersController" customModule="RSSReader" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="3mG-gE-iQ8">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -52,10 +52,10 @@
             </objects>
             <point key="canvasLocation" x="-431" y="109"/>
         </scene>
-        <!--AddFeedController-->
+        <!--AddOrEditFeedController-->
         <scene sceneID="Dee-5v-jpO">
             <objects>
-                <viewController storyboardIdentifier="AddFeedControllerId" title="AddFeedController" id="qJS-uv-475" customClass="AddFeedController" customModule="RSSReader" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddOrEditFeedControllerId" title="AddOrEditFeedController" id="qJS-uv-475" customClass="AddOrEditFeedController" customModule="RSSReader" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="bKs-Va-RvS">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

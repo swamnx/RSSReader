@@ -9,10 +9,10 @@ import Foundation
 import UIKit
 
 struct SearchNews {
+    
     var url: String
     var title: String
     var text: String
-    var imagesData: [UIImage]
-    var date: Date?
     var categories: [String]
+    var icons: [UIImage]
 }

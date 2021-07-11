@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import RealmSwift
 
-class RealmFeedService {
+class RealmFeedService: FeedServiceProtocol {
     
     static var shared = RealmFeedService()
     
@@ -61,13 +61,11 @@ class RealmFeedService {
     }
     
     func save(feed: FeedSave) -> FeedUi? {
-        var realmNews = List<NewsRealm>()
-        for newsItem in feed.news {
-            realmNews.append(.init(url: newsItem.url, title: newsItem.title, text: newsItem.text, categories: newsItem.categories, images: []))
-        }
-        
-        let realmFeed = FeedRealm.init(title: feed.title, url: feed.url, categories: feed.categories, image: feed.icon)
-        realmFeed.news = realmNews
+        let realmFeed = FeedRealm.init(title: feed.title,
+                                      url: feed.url,
+                                      categories: feed.categories,
+                                      image: feed.icon,
+                                      news: feed.news)
         try? localRealm.write {
            localRealm.add(realmFeed)
         }

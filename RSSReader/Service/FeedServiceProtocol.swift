@@ -10,9 +10,9 @@ import Foundation
 protocol FeedServiceProtocol {
     
     func loadAll() -> [FeedUi]
-    func loadById(id: Int) -> FeedUi?
-    func removeById(id: Int) -> Bool
+    func loadAllWithoutFolders() -> [FeedUi]
+    func loadById(id: UUID) -> FeedUi?
+    func removeById(id: UUID) -> Bool
     func save(feed: FeedSave) -> FeedUi?
-    func saveAll(feeds: [FeedSave]) -> [FeedUi]?
-    func update(feed: FeedUi) -> FeedUi?
+    func updateWith(feed: FeedSave, id: UUID) -> FeedUi?
 }

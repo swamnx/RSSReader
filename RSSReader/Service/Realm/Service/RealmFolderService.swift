@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import RealmSwift
 
-class RealmFolderService {
+class RealmFolderService: FolderServiceProtocol {
     
     static var shared = RealmFolderService()
     
@@ -36,8 +36,6 @@ class RealmFolderService {
     }
     
     func loadById(id: UUID) -> FolderUi? {
-        // guard let realmFolder = localRealm.object(ofType: FolderRealm.self, forPrimaryKey: id) else { return nil }
-        // no primary key need to be fixed for this style of searching
         guard let realmFolder =  localRealm.objects(FolderRealm.self).filter("uuid = %@", id).first else { return nil }
         return Converters.shared.convertFolderRealmToFolderUi(source: realmFolder)
     }

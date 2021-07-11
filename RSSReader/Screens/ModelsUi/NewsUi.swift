@@ -15,7 +15,4 @@ struct NewsUi {
     var title: String
     var text: String
     var icons =  [UIImage]()
-    var read = false
-    var favourite = false
-    var deleted = false
 }

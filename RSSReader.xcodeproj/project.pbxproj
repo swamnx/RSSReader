@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		281D3FA026935CDA00A0AC00 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281D3F9F26935CDA00A0AC00 /* AppDelegate.swift */; };
 		281D3FA226935CDA00A0AC00 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281D3FA126935CDA00A0AC00 /* SceneDelegate.swift */; };
-		281D3FA426935CDA00A0AC00 /* AllFeedsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281D3FA326935CDA00A0AC00 /* AllFeedsController.swift */; };
+		281D3FA426935CDA00A0AC00 /* FeedsAndFoldersController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281D3FA326935CDA00A0AC00 /* FeedsAndFoldersController.swift */; };
 		281D3FA726935CDA00A0AC00 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 281D3FA526935CDA00A0AC00 /* Main.storyboard */; };
 		281D3FA926935CDB00A0AC00 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 281D3FA826935CDB00A0AC00 /* Assets.xcassets */; };
 		281D3FAC26935CDB00A0AC00 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 281D3FAA26935CDB00A0AC00 /* LaunchScreen.storyboard */; };
@@ -31,7 +31,7 @@
 		2837319E2699CA71001715C6 /* FolderRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2837319D2699CA71001715C6 /* FolderRealm.swift */; };
 		2870B2092694C3F8008FCF9F /* RssServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2870B2082694C3F8008FCF9F /* RssServiceProtocol.swift */; };
 		2870B20D2694C8FD008FCF9F /* SearchFeed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2870B20C2694C8FD008FCF9F /* SearchFeed.swift */; };
-		2870B2122694CDAC008FCF9F /* AddFeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2870B2112694CDAC008FCF9F /* AddFeedController.swift */; };
+		2870B2122694CDAC008FCF9F /* AddOrEditFeedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2870B2112694CDAC008FCF9F /* AddOrEditFeedController.swift */; };
 		287443272699ECEB00B903EB /* FeedRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287443262699ECEB00B903EB /* FeedRealm.swift */; };
 		287443292699EECB00B903EB /* NewsRealm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 287443282699EECA00B903EB /* NewsRealm.swift */; };
 		2874432B2699F0B700B903EB /* RealmFolderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2874432A2699F0B700B903EB /* RealmFolderService.swift */; };
@@ -44,7 +44,7 @@
 		281D3F9C26935CDA00A0AC00 /* RSSReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RSSReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		281D3F9F26935CDA00A0AC00 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		281D3FA126935CDA00A0AC00 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		281D3FA326935CDA00A0AC00 /* AllFeedsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllFeedsController.swift; sourceTree = "<group>"; };
+		281D3FA326935CDA00A0AC00 /* FeedsAndFoldersController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedsAndFoldersController.swift; sourceTree = "<group>"; };
 		281D3FA626935CDA00A0AC00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		281D3FA826935CDB00A0AC00 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		281D3FAB26935CDB00A0AC00 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -67,7 +67,7 @@
 		2837319D2699CA71001715C6 /* FolderRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderRealm.swift; sourceTree = "<group>"; };
 		2870B2082694C3F8008FCF9F /* RssServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RssServiceProtocol.swift; sourceTree = "<group>"; };
 		2870B20C2694C8FD008FCF9F /* SearchFeed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFeed.swift; sourceTree = "<group>"; };
-		2870B2112694CDAC008FCF9F /* AddFeedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFeedController.swift; sourceTree = "<group>"; };
+		2870B2112694CDAC008FCF9F /* AddOrEditFeedController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddOrEditFeedController.swift; sourceTree = "<group>"; };
 		287443262699ECEB00B903EB /* FeedRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedRealm.swift; sourceTree = "<group>"; };
 		287443282699EECA00B903EB /* NewsRealm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsRealm.swift; sourceTree = "<group>"; };
 		2874432A2699F0B700B903EB /* RealmFolderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmFolderService.swift; sourceTree = "<group>"; };
@@ -111,10 +111,8 @@
 		281D3F9E26935CDA00A0AC00 /* RSSReader */ = {
 			isa = PBXGroup;
 			children = (
-				2837319B2699CA57001715C6 /* Realm */,
 				281D3FCA269378B000A0AC00 /* Screens */,
 				281D3FB82693623900A0AC00 /* Service */,
-				281D3FB326935FBB00A0AC00 /* ModelsUi */,
 				281D3F9F26935CDA00A0AC00 /* AppDelegate.swift */,
 				281D3FA126935CDA00A0AC00 /* SceneDelegate.swift */,
 				281D3FA526935CDA00A0AC00 /* Main.storyboard */,
@@ -130,11 +128,7 @@
 			children = (
 				281D3FB426935FFC00A0AC00 /* FeedUi.swift */,
 				281D3FB62693601800A0AC00 /* FolderUi.swift */,
-				281D3FC52693718500A0AC00 /* FeedSave.swift */,
-				281D3FC72693719000A0AC00 /* FolderSave.swift */,
 				283731962699B52B001715C6 /* NewsUi.swift */,
-				28206879269B1F39003CC1D6 /* UtilsUi.swift */,
-				2820687D269B2889003CC1D6 /* NewsSave.swift */,
 			);
 			path = ModelsUi;
 			sourceTree = "<group>";
@@ -142,14 +136,11 @@
 		281D3FB82693623900A0AC00 /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				2870B20B2694C8E5008FCF9F /* RssServiceModels */,
+				28206880269B30F9003CC1D6 /* Internet */,
+				2837319B2699CA57001715C6 /* Realm */,
 				281D3FB92693625300A0AC00 /* FeedServiceProtocol.swift */,
 				281D3FBB2693626300A0AC00 /* FolderServiceProtocol.swift */,
 				2870B2082694C3F8008FCF9F /* RssServiceProtocol.swift */,
-				2874432A2699F0B700B903EB /* RealmFolderService.swift */,
-				2874432D2699F27D00B903EB /* Converters.swift */,
-				2874432F269A014C00B903EB /* RealmFeedService.swift */,
-				28206855269ADFB8003CC1D6 /* InternetRssService.swift */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -157,64 +148,105 @@
 		281D3FCA269378B000A0AC00 /* Screens */ = {
 			isa = PBXGroup;
 			children = (
-				283731982699B6C6001715C6 /* Feed */,
-				283731932699B134001715C6 /* Folder */,
-				2837319026999DB2001715C6 /* EditFolder */,
-				2870B2102694CD9A008FCF9F /* AddFeed */,
-				281D3FCB269378BA00A0AC00 /* AllFeeds */,
+				281D3FB326935FBB00A0AC00 /* ModelsUi */,
+				28206879269B1F39003CC1D6 /* UtilsUi.swift */,
+				283731982699B6C6001715C6 /* FeedScreen */,
+				283731932699B134001715C6 /* FolderScreen */,
+				2837319026999DB2001715C6 /* EditFolderScreen */,
+				2870B2102694CD9A008FCF9F /* AddOrEditFeedScreen */,
+				281D3FCB269378BA00A0AC00 /* FeedsAndFoldersScreen */,
 			);
 			path = Screens;
 			sourceTree = "<group>";
 		};
-		281D3FCB269378BA00A0AC00 /* AllFeeds */ = {
+		281D3FCB269378BA00A0AC00 /* FeedsAndFoldersScreen */ = {
 			isa = PBXGroup;
 			children = (
-				281D3FA326935CDA00A0AC00 /* AllFeedsController.swift */,
+				281D3FA326935CDA00A0AC00 /* FeedsAndFoldersController.swift */,
 				281D3FCC26937C2400A0AC00 /* UniversalItemUi.swift */,
 			);
-			path = AllFeeds;
+			path = FeedsAndFoldersScreen;
 			sourceTree = "<group>";
 		};
-		2837319026999DB2001715C6 /* EditFolder */ = {
+		2820687F269B30BB003CC1D6 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				2874432F269A014C00B903EB /* RealmFeedService.swift */,
+				2874432A2699F0B700B903EB /* RealmFolderService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		28206880269B30F9003CC1D6 /* Internet */ = {
+			isa = PBXGroup;
+			children = (
+				28206881269B3108003CC1D6 /* RSS */,
+			);
+			path = Internet;
+			sourceTree = "<group>";
+		};
+		28206881269B3108003CC1D6 /* RSS */ = {
+			isa = PBXGroup;
+			children = (
+				28206855269ADFB8003CC1D6 /* InternetRssService.swift */,
+				2870B20B2694C8E5008FCF9F /* RssServiceModels */,
+			);
+			path = RSS;
+			sourceTree = "<group>";
+		};
+		28206882269B31BD003CC1D6 /* ModelsForSaving */ = {
+			isa = PBXGroup;
+			children = (
+				281D3FC52693718500A0AC00 /* FeedSave.swift */,
+				281D3FC72693719000A0AC00 /* FolderSave.swift */,
+				2820687D269B2889003CC1D6 /* NewsSave.swift */,
+			);
+			path = ModelsForSaving;
+			sourceTree = "<group>";
+		};
+		2837319026999DB2001715C6 /* EditFolderScreen */ = {
 			isa = PBXGroup;
 			children = (
 				2837319126999DC3001715C6 /* EditFolderController.swift */,
 			);
-			path = EditFolder;
+			path = EditFolderScreen;
 			sourceTree = "<group>";
 		};
-		283731932699B134001715C6 /* Folder */ = {
+		283731932699B134001715C6 /* FolderScreen */ = {
 			isa = PBXGroup;
 			children = (
 				283731942699B143001715C6 /* FolderController.swift */,
 			);
-			path = Folder;
+			path = FolderScreen;
 			sourceTree = "<group>";
 		};
-		283731982699B6C6001715C6 /* Feed */ = {
+		283731982699B6C6001715C6 /* FeedScreen */ = {
 			isa = PBXGroup;
 			children = (
 				283731992699B6DC001715C6 /* FeedController.swift */,
 			);
-			path = Feed;
+			path = FeedScreen;
 			sourceTree = "<group>";
 		};
 		2837319B2699CA57001715C6 /* Realm */ = {
 			isa = PBXGroup;
 			children = (
-				2837319C2699CA60001715C6 /* Models */,
+				28206882269B31BD003CC1D6 /* ModelsForSaving */,
+				2820687F269B30BB003CC1D6 /* Service */,
+				2837319C2699CA60001715C6 /* ModelsDatabase */,
 			);
 			path = Realm;
 			sourceTree = "<group>";
 		};
-		2837319C2699CA60001715C6 /* Models */ = {
+		2837319C2699CA60001715C6 /* ModelsDatabase */ = {
 			isa = PBXGroup;
 			children = (
+				2874432D2699F27D00B903EB /* Converters.swift */,
 				2837319D2699CA71001715C6 /* FolderRealm.swift */,
 				287443262699ECEB00B903EB /* FeedRealm.swift */,
 				287443282699EECA00B903EB /* NewsRealm.swift */,
 			);
-			path = Models;
+			path = ModelsDatabase;
 			sourceTree = "<group>";
 		};
 		2870B20B2694C8E5008FCF9F /* RssServiceModels */ = {
@@ -226,12 +258,12 @@
 			path = RssServiceModels;
 			sourceTree = "<group>";
 		};
-		2870B2102694CD9A008FCF9F /* AddFeed */ = {
+		2870B2102694CD9A008FCF9F /* AddOrEditFeedScreen */ = {
 			isa = PBXGroup;
 			children = (
-				2870B2112694CDAC008FCF9F /* AddFeedController.swift */,
+				2870B2112694CDAC008FCF9F /* AddOrEditFeedController.swift */,
 			);
-			path = AddFeed;
+			path = AddOrEditFeedScreen;
 			sourceTree = "<group>";
 		};
 		AFB4DBEBED10EB83D43706D7 /* Pods */ = {
@@ -385,9 +417,9 @@
 			files = (
 				281D3FBC2693626300A0AC00 /* FolderServiceProtocol.swift in Sources */,
 				283731972699B52B001715C6 /* NewsUi.swift in Sources */,
-				281D3FA426935CDA00A0AC00 /* AllFeedsController.swift in Sources */,
+				281D3FA426935CDA00A0AC00 /* FeedsAndFoldersController.swift in Sources */,
 				283731952699B143001715C6 /* FolderController.swift in Sources */,
-				2870B2122694CDAC008FCF9F /* AddFeedController.swift in Sources */,
+				2870B2122694CDAC008FCF9F /* AddOrEditFeedController.swift in Sources */,
 				2837319A2699B6DC001715C6 /* FeedController.swift in Sources */,
 				2874432B2699F0B700B903EB /* RealmFolderService.swift in Sources */,
 				281D3FB526935FFC00A0AC00 /* FeedUi.swift in Sources */,
