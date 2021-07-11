@@ -21,6 +21,7 @@
 		281D3FC82693719000A0AC00 /* FolderSave.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281D3FC72693719000A0AC00 /* FolderSave.swift */; };
 		281D3FCD26937C2400A0AC00 /* UniversalItemUi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 281D3FCC26937C2400A0AC00 /* UniversalItemUi.swift */; };
 		28206856269ADFB8003CC1D6 /* InternetRssService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28206855269ADFB8003CC1D6 /* InternetRssService.swift */; };
+		2820687A269B1F39003CC1D6 /* UtilsUi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28206879269B1F39003CC1D6 /* UtilsUi.swift */; };
 		2837319226999DC3001715C6 /* EditFolderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2837319126999DC3001715C6 /* EditFolderController.swift */; };
 		283731952699B143001715C6 /* FolderController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283731942699B143001715C6 /* FolderController.swift */; };
 		283731972699B52B001715C6 /* NewsUi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 283731962699B52B001715C6 /* NewsUi.swift */; };
@@ -54,6 +55,7 @@
 		281D3FC72693719000A0AC00 /* FolderSave.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderSave.swift; sourceTree = "<group>"; };
 		281D3FCC26937C2400A0AC00 /* UniversalItemUi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UniversalItemUi.swift; sourceTree = "<group>"; };
 		28206855269ADFB8003CC1D6 /* InternetRssService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InternetRssService.swift; sourceTree = "<group>"; };
+		28206879269B1F39003CC1D6 /* UtilsUi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UtilsUi.swift; sourceTree = "<group>"; };
 		2837319126999DC3001715C6 /* EditFolderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFolderController.swift; sourceTree = "<group>"; };
 		283731942699B143001715C6 /* FolderController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FolderController.swift; sourceTree = "<group>"; };
 		283731962699B52B001715C6 /* NewsUi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsUi.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				281D3FC52693718500A0AC00 /* FeedSave.swift */,
 				281D3FC72693719000A0AC00 /* FolderSave.swift */,
 				283731962699B52B001715C6 /* NewsUi.swift */,
+				28206879269B1F39003CC1D6 /* UtilsUi.swift */,
 			);
 			path = ModelsUi;
 			sourceTree = "<group>";
@@ -382,6 +385,7 @@
 				2837319A2699B6DC001715C6 /* FeedController.swift in Sources */,
 				2874432B2699F0B700B903EB /* RealmFolderService.swift in Sources */,
 				281D3FB526935FFC00A0AC00 /* FeedUi.swift in Sources */,
+				2820687A269B1F39003CC1D6 /* UtilsUi.swift in Sources */,
 				28206856269ADFB8003CC1D6 /* InternetRssService.swift in Sources */,
 				2837319E2699CA71001715C6 /* FolderRealm.swift in Sources */,
 				281D3FCD26937C2400A0AC00 /* UniversalItemUi.swift in Sources */,

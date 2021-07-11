@@ -22,7 +22,13 @@ class InternetRssService: RssServiceProtocol {
                 return completionHandler("Not Rss Site", nil)
             }
             let categories = self?.extractAvailableCategories(channel: channel!)
-            let convertedResponse = SearchFeed.init(icon: nil,
+            var chanelImage: UIImage?
+            if channel?.imageUrl != nil {
+                if let downloadedChanelImageData = try? Data(contentsOf: URL.init(string: (channel?.imageUrl)!)!) {
+                    chanelImage = .init(data: downloadedChanelImageData)!
+                }
+            }
+            let convertedResponse = SearchFeed.init(icon: chanelImage,
                                                    title: channel!.title,
                                                    url: url,
                                                    categories: categories ?? [])
@@ -34,12 +40,13 @@ class InternetRssService: RssServiceProtocol {
         let title: String
         let description: String
         let items: [Item]
-        
+        let imageUrl: String?
         static func deserialize(_ node: XMLIndexer) throws-> Channel {
             return try Channel(
                 title: node["title"].value(),
                 description: node["description"].value(),
-                items: node["item"].value()
+                items: node["item"].value(),
+                imageUrl: node["image"]["url"].value()
             )
         }
     }
@@ -48,7 +55,8 @@ class InternetRssService: RssServiceProtocol {
         let title: String
         let link: String
         let description: String
-        let enclosure: String?
+        let imageUrl: String?
+        let imageUrls: [String]
         let categories: [String]
 
         static func deserialize(_ node: XMLIndexer) throws -> Item {
@@ -56,9 +64,20 @@ class InternetRssService: RssServiceProtocol {
                 title: node["title"].value(),
                 link: node["link"].value(),
                 description: node["description"].value(),
-                enclosure: node["enclosure"].value(),
+                imageUrl: node["enclosure"].element?.attribute(by: "url")?.text,
+                imageUrls: deserializeImagesUrls(node),
                 categories: node["category"].value()
             )
+        }
+        
+        private static func deserializeImagesUrls(_ node: XMLIndexer) -> [String] {
+            var extractedImageUrls = [String]()
+            for mediaContent in node["media:content"].all {
+                if let url = mediaContent.element?.attribute(by: "url")?.text {
+                    extractedImageUrls.append(url)
+                }
+            }
+            return extractedImageUrls
         }
     }
     

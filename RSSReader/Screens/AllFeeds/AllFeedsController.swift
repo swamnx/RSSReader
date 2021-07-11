@@ -50,7 +50,7 @@ extension AllFeedsController {
         let item = getUniversalItems()[indexPath.row]
         if item.feed != nil {
             cell.textLabel?.text = item.feed!.getCellText()
-            cell.imageView?.image = item.feed!.icon
+            cell.imageView?.image = item.feed!.icon?.imageResized(to: .init(width: 53, height: 30))
         }
         if item.folder != nil {
             cell.imageView?.image = nil
