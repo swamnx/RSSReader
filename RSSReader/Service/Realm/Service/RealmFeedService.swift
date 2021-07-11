@@ -71,7 +71,7 @@ class RealmFeedService: FeedServiceProtocol {
         }
         return Converters.shared.convertFeedRealmToFeedUi(source: realmFeed)
     }
-    // No news Update
+    
     func updateWith(feed: FeedSave, id: UUID) -> FeedUi? {
         guard let realmFeed =  localRealm.objects(FeedRealm.self).filter("uuid = %@", id).first else { return nil }
         try? localRealm.write {
@@ -82,6 +82,10 @@ class RealmFeedService: FeedServiceProtocol {
             }
             realmFeed.categories.removeAll()
             realmFeed.categories.append(objectsIn: feed.categories)
+            realmFeed.news.removeAll()
+            for newsItem in feed.news {
+                realmFeed.news.append(.init(url: newsItem.url, title: newsItem.title, text: newsItem.text, categories: newsItem.categories, images: []))
+            }
         }
         return Converters.shared.convertFeedRealmToFeedUi(source: realmFeed)
     }

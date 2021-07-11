@@ -123,8 +123,9 @@ extension AddOrEditFeedController {
         }
         if response != nil {
             self.navigationController?.popViewController(animated: true)
+        } else {
+            self.present(AddOrEditFeedController.getOkAletControllerWith(title: "Can't saved Feed info"), animated: true, completion: nil)
         }
-        self.present(AddOrEditFeedController.getOkAletControllerWith(title: "Can't saved Feed info"), animated: true, completion: nil)
     }
 }
 
@@ -139,7 +140,7 @@ extension AddOrEditFeedController {
         }
         textField.resignFirstResponder()
         rssService.searchFeed(url: textField.text!, completionHandler: { [weak self] error, searchFeedResponse in
-            DispatchQueue.main.sync {
+            DispatchQueue.main.async {
                 guard let self = self else { return }
                 guard let response = searchFeedResponse else {
                     self.present(AddOrEditFeedController.getOkAletControllerWith(title: error!), animated: true, completion: nil)
