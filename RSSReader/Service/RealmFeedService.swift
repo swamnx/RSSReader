@@ -50,17 +50,24 @@ class RealmFeedService {
         guard let realmFeed =  localRealm.objects(FeedRealm.self).filter("uuid = %@", id).first else { return nil }
         return Converters.shared.convertFeedRealmToFeedUi(source: realmFeed)
     }
-    // No child delete
+    
     func removeById(id: UUID) -> Bool {
         guard let realmFeed =  localRealm.objects(FeedRealm.self).filter("uuid = %@", id).first else { return false }
         try? localRealm.write {
+            localRealm.delete(realmFeed.news)
             localRealm.delete(realmFeed)
         }
         return true
     }
     
     func save(feed: FeedSave) -> FeedUi? {
+        var realmNews = List<NewsRealm>()
+        for newsItem in feed.news {
+            realmNews.append(.init(url: newsItem.url, title: newsItem.title, text: newsItem.text, categories: newsItem.categories, images: []))
+        }
+        
         let realmFeed = FeedRealm.init(title: feed.title, url: feed.url, categories: feed.categories, image: feed.icon)
+        realmFeed.news = realmNews
         try? localRealm.write {
            localRealm.add(realmFeed)
         }

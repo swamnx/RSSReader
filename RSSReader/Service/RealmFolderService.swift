@@ -42,10 +42,15 @@ class RealmFolderService {
         return Converters.shared.convertFolderRealmToFolderUi(source: realmFolder)
     }
     
-    // No child delete
     func removeById(id: UUID) -> Bool {
         guard let realmFolder = localRealm.objects(FolderRealm.self).filter("uuid = %@", id).first else { return false }
         try? localRealm.write {
+            for feed in realmFolder.feeds {
+                for newsItem in feed.news {
+                    localRealm.delete(newsItem)
+                }
+                localRealm.delete(feed)
+            }
             localRealm.delete(realmFolder)
         }
         return true

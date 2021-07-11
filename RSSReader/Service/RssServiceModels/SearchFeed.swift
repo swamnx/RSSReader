@@ -13,5 +13,6 @@ struct SearchFeed {
     var title: String
     var url: String
     var categories: [String]
+    var news: [SearchNews]
     
 }

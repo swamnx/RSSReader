@@ -21,17 +21,19 @@ class InternetRssService: RssServiceProtocol {
             if channel == nil {
                 return completionHandler("Not Rss Site", nil)
             }
-            let categories = self?.extractAvailableCategories(channel: channel!)
+            let categories = InternetRssService.extractCategories(channel: channel!)
             var chanelImage: UIImage?
             if channel?.imageUrl != nil {
                 if let downloadedChanelImageData = try? Data(contentsOf: URL.init(string: (channel?.imageUrl)!)!) {
                     chanelImage = .init(data: downloadedChanelImageData)!
                 }
             }
+            let news = InternetRssService.extractNews(channel: channel!)
             let convertedResponse = SearchFeed.init(icon: chanelImage,
                                                    title: channel!.title,
                                                    url: url,
-                                                   categories: categories ?? [])
+                                                   categories: categories,
+                                                   news: news)
             return completionHandler(nil, convertedResponse)
         }.resume()
     }
@@ -81,7 +83,7 @@ class InternetRssService: RssServiceProtocol {
         }
     }
     
-    private func extractAvailableCategories(channel: Channel) -> [String] {
+    private static func extractCategories(channel: Channel) -> [String] {
         var uniqueCategories = Set<String>()
         for item in channel.items {
             for category in item.categories {
@@ -89,5 +91,16 @@ class InternetRssService: RssServiceProtocol {
             }
         }
         return .init(uniqueCategories)
+    }
+    
+    private static func extractNews(channel: Channel) -> [SearchNews] {
+        return channel.items.map({ item in
+                                    return .init(url: item.link,
+                                                title: item.title,
+                                                text: item.description,
+                                                imagesData: [],
+                                                date: nil,
+                                                categories: item.categories)
+        })
     }
 }

@@ -14,4 +14,5 @@ struct FeedSave {
     var title: String
     var categories = [String]()
     var icon: UIImage?
+    var news = [NewsSave]()
 }

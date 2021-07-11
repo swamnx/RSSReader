@@ -16,6 +16,7 @@ class AddFeedController: UIViewController, UITextFieldDelegate {
     }
     
     class ResponseAttributes {
+        var news = [SearchNews]()
         var categories = [String]()
         var icon: UIImage?
         var title: String?
@@ -105,9 +106,16 @@ extension AddFeedController {
                 selectedCategories.append(response.categories[indexPath.row])
             }
         }
-        let feedSave = FeedSave.init(url: response.url!, title: response.title!, categories: selectedCategories, icon: response.icon)
+        var filteredNews = response.news
+        if response.rssFeedHasCategories {
+            filteredNews = filterOnlySelectedCategories(news: filteredNews, categories: selectedCategories)
+        }
+        var newsSave = [NewsSave]()
+        for newsItem in filteredNews {
+            newsSave.append(.init(url: newsItem.url, title: newsItem.title, text: newsItem.text, categories: newsItem.categories))
+        }
+        let feedSave = FeedSave.init(url: response.url!, title: response.title!, categories: selectedCategories, icon: response.icon, news: newsSave)
         if params.add {
-            let feedSave = FeedSave.init(url: response.url!, title: response.title!, categories: selectedCategories, icon: response.icon)
             feedService.save(feed: feedSave)
         } else {
             feedService.updateWith(feed: feedSave, id: params.existedFeed!.id)
@@ -132,6 +140,7 @@ extension AddFeedController {
                     self?.response.rssFeedHasCategories = false
                     self?.disableSaveButton()
                     self?.response.categories.removeAll()
+                    self?.response.news.removeAll()
                     self?.response.icon = nil
                     self?.response.title = nil
                     self?.response.loadedByDefault = false
@@ -149,6 +158,7 @@ extension AddFeedController {
                     self?.response.rssFeedHasCategories = false
                     self?.enableSaveButton()
                 }
+                self?.response.news = response.news
                 self?.response.categories = response.categories
                 self?.response.icon = response.icon
                 self?.response.title = response.title
@@ -174,5 +184,22 @@ extension AddFeedController {
     private func enableSaveButton() {
         button.isEnabled = true
         button.backgroundColor = .systemBlue
+    }
+    
+    private func filterOnlySelectedCategories(news: [SearchNews], categories: [String]) -> [SearchNews] {
+        var filteredNews = [SearchNews]()
+        for newsItem in news {
+            var hasSelectedCategory = false
+            for category in categories {
+                if newsItem.categories.contains(category) {
+                    hasSelectedCategory = true
+                    break
+                }
+            }
+            if hasSelectedCategory {
+                filteredNews.append(newsItem)
+            }
+        }
+        return filteredNews
     }
 }
