@@ -21,10 +21,11 @@ class InternetRssService: RssServiceProtocol {
             if channel == nil {
                 return completionHandler("Not Rss Site", nil)
             }
+            let categories = self?.extractAvailableCategories(channel: channel!)
             let convertedResponse = SearchFeed.init(icon: nil,
                                                    title: channel!.title,
                                                    url: url,
-                                                   categories: [])
+                                                   categories: categories ?? [])
             return completionHandler(nil, convertedResponse)
         }.resume()
     }
@@ -47,16 +48,27 @@ class InternetRssService: RssServiceProtocol {
         let title: String
         let link: String
         let description: String
-        let enclosure: String
+        let enclosure: String?
+        let categories: [String]
 
         static func deserialize(_ node: XMLIndexer) throws -> Item {
             return try Item(
                 title: node["title"].value(),
                 link: node["link"].value(),
                 description: node["description"].value(),
-                enclosure: node["enclosure"].value()
-                
+                enclosure: node["enclosure"].value(),
+                categories: node["category"].value()
             )
         }
+    }
+    
+    private func extractAvailableCategories(channel: Channel) -> [String] {
+        var uniqueCategories = Set<String>()
+        for item in channel.items {
+            for category in item.categories {
+                uniqueCategories.insert(category)
+            }
+        }
+        return .init(uniqueCategories)
     }
 }

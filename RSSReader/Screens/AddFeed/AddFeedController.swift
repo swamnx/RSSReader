@@ -105,9 +105,9 @@ extension AddFeedController {
                 selectedCategories.append(response.categories[indexPath.row])
             }
         }
-        let feedSave = FeedSave.init(url: response.url!, title: response.title!, categories: response.categories, icon: response.icon)
+        let feedSave = FeedSave.init(url: response.url!, title: response.title!, categories: selectedCategories, icon: response.icon)
         if params.add {
-            let feedSave = FeedSave.init(url: response.url!, title: response.title!, categories: response.categories, icon: response.icon)
+            let feedSave = FeedSave.init(url: response.url!, title: response.title!, categories: selectedCategories, icon: response.icon)
             feedService.save(feed: feedSave)
         } else {
             feedService.updateWith(feed: feedSave, id: params.existedFeed!.id)
