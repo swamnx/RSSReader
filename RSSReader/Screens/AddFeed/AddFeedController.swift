@@ -24,7 +24,7 @@ class AddFeedController: UIViewController, UITextFieldDelegate {
         var loadedByDefault = false
     }
     
-    var rssService = DummyRssService()
+    var rssService = InternetRssService()
     var feedService = RealmFeedService.shared!
 
     var params = AddFeedInitParams()
@@ -125,35 +125,36 @@ extension AddFeedController {
         if textField.text!.isEmpty {
             return false
         }
-        let url = URL.init(string: textField.text!)
-        guard let unwrappedUrl = url else {return false}
         textField.resignFirstResponder()
-        rssService.searchFeed(url: unwrappedUrl, completionHandler: { [weak self] error, searchFeedResponse in
-            guard let response = searchFeedResponse else {
-                self?.response.rssFeedHasCategories = false
-                self?.disableSaveButton()
-                self?.response.categories.removeAll()
-                self?.response.icon = nil
-                self?.response.title = nil
+        rssService.searchFeed(url:  textField.text!, completionHandler: { [weak self] error, searchFeedResponse in
+            DispatchQueue.main.async {
+                guard let response = searchFeedResponse else {
+                    self?.response.rssFeedHasCategories = false
+                    self?.disableSaveButton()
+                    self?.response.categories.removeAll()
+                    self?.response.icon = nil
+                    self?.response.title = nil
+                    self?.response.loadedByDefault = false
+                    let alertController = UIAlertController(title: error!, message: nil, preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil )
+                    alertController.addAction(okAction)
+                    self?.present(alertController, animated: true, completion: nil)
+                    return
+                }
                 self?.response.loadedByDefault = false
-                let alertController = UIAlertController(title: error!, message: nil, preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "Ok", style: .default, handler: nil )
-                alertController.addAction(okAction)
-                self?.present(alertController, animated: true, completion: nil)
-                return
+                if response.categories.count > 0 {
+                    self?.response.rssFeedHasCategories = true
+                    self?.disableSaveButton()
+                } else {
+                    self?.response.rssFeedHasCategories = false
+                    self?.enableSaveButton()
+                }
+                self?.response.categories = response.categories
+                self?.response.icon = response.icon
+                self?.response.title = response.title
+                self?.response.url = response.url
+                self?.categoriesView.reloadData()
             }
-            self?.response.loadedByDefault = false
-            if response.categories.count > 0 {
-                self?.response.rssFeedHasCategories = true
-                self?.disableSaveButton()
-            } else {
-                self?.enableSaveButton()
-            }
-            self?.response.categories = response.categories
-            self?.response.icon = response.icon
-            self?.response.title = response.title
-            self?.response.url = response.url
-            self?.categoriesView.reloadData()
         })
        return true
     }

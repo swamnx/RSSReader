@@ -3,6 +3,7 @@
 
 pod 'SwiftLint'
 pod 'RealmSwift', '~>10'
+pod 'SWXMLHash', '~> 5.0.0'
 
 target 'RSSReader' do
   # Comment the next line if you don't want to use dynamic frameworks

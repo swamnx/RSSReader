@@ -9,5 +9,5 @@ import Foundation
 
 protocol RssServiceProtocol {
     
-    func searchFeed(url: URL, completionHandler: (_ error: String?, _ data: SearchFeed?) -> Void)
+    func searchFeed(url: String, completionHandler: @escaping (_ error: String?, _ data: SearchFeed?) -> Void)
 }
